@@ -81,7 +81,7 @@
     float: left;
     width: calc(100% - 50px);
     height: 100%;
-    background-image: url('../../content/images/logo-text.png');
+    /* background-image: url('../../content/images/logo-text.png'); */
     background-repeat: no-repeat;
     background-position: center;
 }
