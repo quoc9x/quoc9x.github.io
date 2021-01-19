@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <link href="../css/pages/customer.css" rel="stylesheet" />
+</head>
+<body>
+    <!--Menu-->
+    <div class="menu">
+        <!--Logo-->
+        <div id="logo">
+            <div class="iconbar"></div>
+            <!--Example: inline
+            <div class="iconbar" style="width:200px"></div>-->
+            <div class="logo-text"></div>
+        </div>
+        <!--Menu-item-->
+        <div id="menu-content">
+            <a href="employee.html" class="menu-item">
+                <div class="menu-item-icon icon-board"></div>
+                <div class="menu-item-text">Nhân viên</div>
+            </a>
+            <a href="customer.html" class="menu-item">
+                <div class="menu-item-icon icon-report"></div>
+                <div class="menu-item-text">Khách hàng</div>
+            </a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-header"></div>
+        <div class="content-body">
+            <div class="page-title">
+                <h1>
+                    Danh mục khách hàng
+                </h1>
+            </div>
+            <div class="grid-content">
+                <div class="toolbar">
+                    <button><i class="icon icon-add"></i>Thêm</button>
+                    <button><i class="icon icon-edit"></i>Sửa</button>
+                    <button><i class="icon icon-delete"></i>Xóa</button>
+                </div>
+                <div class="gridbar">
+                    <table border="1" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <th>Mã khách hàng</th>
+                                <th>Tên khách hàng</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--<tr>
+                                <td>NV001</td>
+                                <td>Nguyễn Văn Cường Quốc</td>
+                                <td>cqvnno1@gmail.com</td>
+                                <td>0968604182</td>
+                                <td>Hà Tĩnh</td>
+                            </tr>
+                            <tr>
+                                <td>NV001</td>
+                                <td>Nguyễn Văn Cường Quốc</td>
+                                <td>cqvnno1@gmail.com</td>
+                                <td>0968604182</td>
+                                <td>Hà Tĩnh</td>
+                            </tr>
+                            <tr>
+                                <td>NV001</td>
+                                <td>Nguyễn Văn Cường Quốc</td>
+                                <td>cqvnno1@gmail.com</td>
+                                <td>0968604182</td>
+                                <td>Hà Tĩnh</td>
+                            </tr>-->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paging">
+                    paging
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <script src="../js/customer.js"></script>
+    <script src="../js/common.js"></script>
+</body>
+</html>

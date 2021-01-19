@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Website tính toán cấu kiện</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./content/my_images/Q_char.ico" />
+    <link href="./css/pages/customer.css" rel="stylesheet" />
+    <link href="./css/pages/index.css" rel="stylesheet" />
+</head>
+<body>
+    <!--Menu-->
+    <div class="menu">
+        <!--Logo-->
+        <div id="logo">
+            <div class="iconbar"></div>
+            <!--Example: inline
+            <div class="iconbar" style="width:200px"></div>-->
+            <div class="logo-text"></div>
+        </div>
+        <!--Menu-item-->
+        <div id="menu-content">
+            <a href="index.html" class="menu-item">
+                <div class="menu-item-icon icon-report"></div>
+                <div class="menu-item-text">Tính toán dầm</div>
+            </a>
+            <a href="index.html" class="menu-item">
+                <div class="menu-item-icon icon-board"></div>
+                <div class="menu-item-text">Tính toán sàn</div>
+            </a>
+            <a href="index.html" class="menu-item">
+                <div class="menu-item-icon icon-report"></div>
+                <div class="menu-item-text">Tính toán cột</div>
+            </a>
+            <a href="index.html" class="menu-item">
+                <div class="menu-item-icon icon-report"></div>
+                <div class="menu-item-text">Trợ giúp</div>
+            </a>
+            <a href="index.html" class="menu-item">
+                <div class="menu-item-icon icon-report"></div>
+                <div class="menu-item-text">Blog</div>
+            </a>
+            <a href="index.html" class="menu-item">
+                <div class="menu-item-icon icon-report"></div>
+                <div class="menu-item-text">About</div>
+            </a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-header"></div>
+        <div class="content-body">
+            <div class="page-title">
+                <h1>
+                    Danh mục nhân viên
+                </h1>
+            </div>
+            <div class="grid-content">
+                <div class="toolbar">
+                    <button style="width: 120px;" id="btnImportExcel"><i class="icon icon-importexcel"></i>Import từ Excel</button>
+                    <button id="btnAdd"><i class="icon icon-add"></i>Thêm</button>
+                    <button id="btnEdit"><i class="icon icon-edit"></i>Sửa</button>
+                    <button id="btnDelete"><i class="icon icon-delete"></i>Xóa</button>
+                    <button style="width: 90px;" id="btnBeamProcess"><i class="icon icon-beamprocess"></i>Tính toán</button>
+                </div>
+                <div class="gridbar">
+                    <table id="tbEmployeeList" border="1" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên dầm</th>
+                                <th>Bê tông</th>
+                                <th>Thép</th>
+                                <th>Chiều cao h (m)</th>
+                                <th>Bề rộng b (m)</th>
+                                <th>Bề dày sàn hf (m)</th>
+                                <th>Nhịp dầm L (m)</th>
+                                <th>Khoảng cách a (m)</th>
+                                <th>Mô men M (daNm)</th>
+                                <th>Kết quả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paging">
+                    paging
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Dialog chi tiết thông tin nhân viên:-->
+    <div class="dialog-modal">
+        
+    </div>
+    <div class="dialog">
+        <div class="dialog-title">
+            <div class="title-text">
+                Thông tin nhân viên
+            </div>
+            <div class="title-close-bottom">
+
+            </div>
+            
+        </div>
+                
+        <div class="dialog-body">
+
+
+            <fieldset style="width: 55%; float: left;">
+                <legend>Thông số hình học:</legend>
+                <div class="row">
+                    <label>Tên dầm</label>
+                    <!--<input id="txtEmployeeCode" class="required" type="text" />-->
+                    <input id="txtEmployeeCode" required type="text" />
+                </div>
+                <div class="row">
+                    <label>Chiều cao h (m)</label>
+                    <!--<input id="txtEmployeeName" class="required" type="text" />-->
+                    <input id="txtEmployeeName" required type="text" />
+                </div>
+                <div class="row">
+                    <label>Bề rộng b (m)</label>
+                    <!--<input id="txtEmail" class="required"  type="email" />-->
+                    <input id="txtEmployeeEmail" required type="text" />
+                </div>
+                <div class="row-right">
+                    <label>Bề dày sàn hf (m)</label>
+                    <input id="txtMobile" type="tel" />
+                </div>
+                <div class="row">
+                    <label>Nhịp dầm L (m)</label>
+                    <input id="txtCompanyName" type="text" />
+                </div>
+                <div class="row">
+                    <label>Khoảng cách a (m)</label>
+                    <input id="txtCompanyName" type="text" />
+                </div>
+                
+            </fieldset>
+
+            <fieldset style="width: 30%; float: right;">
+                <legend>Vật liệu:</legend>
+                <div class="row">
+                <label>Bê tông</label>
+                <select name="cboTypeBeam" id="cboTypeBeam">
+                    <option value="HCN">B15</option>
+                    <option value="HCT">B20</option>
+                  </select>
+            </div>
+            <div class="row">
+                <label>Thép</label>
+                <select name="cboTypeBeam" id="cboTypeBeam">
+                    <option value="HCN">CI</option>
+                    <option value="HCT">CII</option>
+                  </select>
+            </div>
+            </fieldset>
+
+            <fieldset style="width: 30%; float: right;">
+                <legend>Nội lực:</legend>
+                <div class="row">
+                    <label>Mô men (kNm)</label>
+                    <input id="txtCompanyName" type="text" />
+                </div>
+            </fieldset>
+
+
+
+        </div>
+
+        <div class="dialog-footer">
+            <button id="btnSave">Cất</button>
+            <button id="btnCancel">Hủy</button>
+        </div>
+    </div>
+
+    <script src="./js/jquery-3.5.1.min.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/commontest.js"></script>
+</body>
+</html>
