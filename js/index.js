@@ -80,7 +80,22 @@ class EmployeeJS {
      * Thực hiện cất dữ liệu:
      * */
     btnSaveOnClick() {
-        
+        var beam = {};
+        beam.STT = lstBeams.length;
+        beam.TenDam = $("#txtEmployeeCode").val();
+        beam.ChieuCaoh = $("#txtChieuCaoh").val();
+        beam.BeRongb = $("#txtBeRongb").val();
+        beam.BeDaySanhf = $("#txtBeDaySanhf").val();
+        beam.NhipDamL = $("#txtNhipDamL").val();
+        beam.KhoangCacha = $("#txtKhoangCacha").val();
+
+        beam.BeTong = $( "#cboBeTong option:selected" ).text();
+        beam.Thep = $( "#cboBeTong option:selected" ).text();
+        // Thực hiện cất dữ liệu vào database: 
+        lstBeams.push(beam);
+        // Load lại dữ liệu:
+        this.loadData();
+        this.hideDialogDetail();
     }
 
     
