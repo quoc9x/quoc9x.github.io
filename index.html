@@ -33,6 +33,10 @@
             </a>
             <a href="index.html" class="menu-item">
                 <div class="menu-item-icon icon-report"></div>
+                <div class="menu-item-text">Đăng nhập</div>
+            </a>
+            <a href="index.html" class="menu-item">
+                <div class="menu-item-icon icon-report"></div>
                 <div class="menu-item-text">Trợ giúp</div>
             </a>
             <a href="index.html" class="menu-item">
@@ -55,7 +59,7 @@
             </div>
             <div class="grid-content">
                 <div class="toolbar">
-                    <button style="width: 120px;" id="btnImportExcel"><i class="icon icon-importexcel"></i>Import từ Excel</button>
+                    <button style="width: 130px;" id="btnImportExcel"><i class="icon icon-importexcel"></i>Import từ Excel</button>
                     <button id="btnAdd"><i class="icon icon-add"></i>Thêm</button>
                     <button id="btnEdit"><i class="icon icon-edit"></i>Sửa</button>
                     <button id="btnDelete"><i class="icon icon-delete"></i>Xóa</button>
@@ -139,38 +143,52 @@
                 
             </fieldset>
 
-            <fieldset style="width: 30%; float: right;">
+            <fieldset style="width: 30%; float: left;">
                 <legend>Vật liệu:</legend>
                 <div class="row">
                 <label>Bê tông</label>
                 <select name="cboBeTong" id="cboBeTong">
-                    <option value="1">B15</option>
-                    <option value="2">B20</option>
+                    <option value="1">B12.5 - M150</option>
+                    <option value="2">B15 - M200</option>
+                    <option value="3">B20 - M250</option>
+                    <option value="4">B25 - M350</option>
+                    <option value="5">B30 - M400</option>
+                    <option value="6">B35 - M450</option>
+                    <option value="7">B40 - M500</option>
+                    <option value="8">B45 - M600</option>
                   </select>
             </div>
             <div class="row">
                 <label>Thép</label>
                 <select name="cboThep" id="cboThep">
-                    <option value="1">CI</option>
-                    <option value="2">CII</option>
+                    <option value="1">CI - AI</option>
+                    <option value="2">CII - AII</option>
+                    <option value="2">CIII - AIII</option>
+                    <option value="2">CIV - AIV</option>
+
                   </select>
             </div>
             </fieldset>
 
-            <fieldset style="width: 30%; float: right;">
+            <fieldset style="width: 30%; float: left;">
                 <legend>Nội lực:</legend>
                 <div class="row">
                     <label>Mô men (kNm)</label>
                     <input id="txtMomentM" type="text" />
                 </div>
             </fieldset>
+            <div style="float: left;">
+                <img src="./content/images/D_tietdienchuT.png" alt="Dầm">
+            </div>
+            
+
 
 
 
         </div>
 
         <div class="dialog-footer">
-            <button id="btnSave">Cất</button>
+            <button id="btnSave">Lưu</button>
             <button id="btnCancel">Hủy</button>
         </div>
     </div>

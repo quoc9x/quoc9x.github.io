@@ -86,26 +86,33 @@ class EmployeeJS {
 
     btnEditOnClick() {
         var self = this;
+        this.FormMode = "edit";
         // Lấy mã nhân viên được chọn:
         var STT = this.getEmployeeCodeSelected();
-        if (STT) {
+        if (STT != null) {
+            STT--;
             // Hiển thị form chi tiết:
             this.showDialogDetail();
             // Binding các thông tin của nhân viên lên form
             var beam = lstBeams[STT];
-            $("#txtTenDam").val(beam["Ten"]);
-            $("#txtChieuCaoh").val(beam["ChieuCaoh"]);
-            $("#txtBeRongb").val(beam["BeRongb"]);
-            $("#txtBeDaySanhf").val(beam["BeDaySanhf"]);
-            $("#txtNhipDamL").val(beam["NhipDamL"]);
-            $("#txtKhoangCacha").val(beam["KhoangCacha"]);
+            $("#txtTenDam").val(beam.Ten);
+            $("#txtChieuCaoh").val(beam.ChieuCaoh);
+            $("#txtBeRongb").val(beam.BeRongb);
+            $("#txtBeDaySanhf").val(beam.BeDaySanhf);
+            $("#txtNhipDamL").val(beam.NhipDamL);
+            $("#txtKhoangCacha").val(beam.KhoangCacha);
 
-            $( "#cboBeTong option:selected" ).val(beam["BeTong"]);
-            $( "#cboThep option:selected" ).val(beam["Thep"]);
+            $( "#cboBeTong option:selected" ).val(beam.BeTong);
+            $( "#cboThep option:selected" ).val(beam.Thep);
 
-            $("#txtMomentM").val(beam["MomentM"]);
+            $("#txtMomentM").val(beam.MomentM);
 
         }
+        else{
+            alert("Chưa chọn dầm để sửa");
+        }
+        
+        
     }
 
 
@@ -116,25 +123,41 @@ class EmployeeJS {
      * */
     btnSaveOnClick() {
 
-        
+        // Thực hiện cất dữ liệu vào database:
+        // Kiểm tra xem sửa hay thêm mới
+        if (this.FormMode === "add"){
+            var beam = {};
+            beam.STT = lstBeams.length + 1;
 
-        var beam = {};
-        beam.STT = lstBeams.length + 1;
+            beam.Ten = $("#txtTenDam").val();
+            beam.ChieuCaoh = $("#txtChieuCaoh").val();
+            beam.BeRongb = $("#txtBeRongb").val();
+            beam.BeDaySanhf = $("#txtBeDaySanhf").val();
+            beam.NhipDamL = $("#txtNhipDamL").val();
+            beam.KhoangCacha = $("#txtKhoangCacha").val();
 
-        beam.Ten = $("#txtTenDam").val();
-        beam.ChieuCaoh = $("#txtChieuCaoh").val();
-        beam.BeRongb = $("#txtBeRongb").val();
-        beam.BeDaySanhf = $("#txtBeDaySanhf").val();
-        beam.NhipDamL = $("#txtNhipDamL").val();
-        beam.KhoangCacha = $("#txtKhoangCacha").val();
+            beam.BeTong = $("#cboBeTong option:selected").text();
+            beam.Thep = $("#cboThep option:selected").text();
 
-        beam.BeTong = $( "#cboBeTong option:selected" ).text();
-        beam.Thep = $( "#cboBeTong option:selected" ).text();
+            beam.MomentM = $("#txtMomentM").val();
 
-        beam.MomentM = $("#txtMomentM").val();
+            lstBeams.push(beam);
+        }
+        else if (this.FormMode === "edit"){
+            var STT = this.getEmployeeCodeSelected();
+            STT--;
+            lstBeams[STT].Ten = $("#txtTenDam").val();
+            lstBeams[STT].ChieuCaoh = $("#txtChieuCaoh").val();
+            lstBeams[STT].BeRongb = $("#txtBeRongb").val();
+            lstBeams[STT].BeDaySanhf = $("#txtBeDaySanhf").val();
+            lstBeams[STT].NhipDamL = $("#txtNhipDamL").val();
+            lstBeams[STT].KhoangCacha = $("#txtKhoangCacha").val();
 
-        // Thực hiện cất dữ liệu vào database: 
-        lstBeams.push(beam);
+            lstBeams[STT].BeTong = $("#cboBeTong option:selected").text();
+            lstBeams[STT].Thep = $("#cboThep option:selected").text();
+
+            lstBeams[STT].MomentM = $("#txtMomentM").val();
+        }
         // Load lại dữ liệu:
         this.loadData();
         this.hideDialogDetail();
@@ -231,7 +254,7 @@ var lstBeams = [
     {
         STT: 1,
         Ten: "Dầm D1",
-        BeTong: "B15",
+        BeTong: "B15 - M200",
         Thep: "CII",
         ChieuCaoh: 0.6,
         BeRongb: 0.2,
@@ -244,7 +267,7 @@ var lstBeams = [
     {
         STT: 2,
         Ten: "Dầm D2",
-        BeTong: "B15",
+        BeTong: "B15 - M200",
         Thep: "CII",
         ChieuCaoh: 0.6,
         BeRongb: 0.2,
@@ -257,7 +280,7 @@ var lstBeams = [
     {
         STT: 3,
         Ten: "Dầm D3",
-        BeTong: "B15",
+        BeTong: "B15 - M200",
         Thep: "CII",
         ChieuCaoh: 0.6,
         BeRongb: 0.2,
@@ -270,7 +293,7 @@ var lstBeams = [
     {
         STT: 4,
         Ten: "Dầm D4",
-        BeTong: "B15",
+        BeTong: "B15 - M200",
         Thep: "CII",
         ChieuCaoh: 0.6,
         BeRongb: 0.2,
@@ -283,7 +306,7 @@ var lstBeams = [
     {
         STT: 5,
         Ten: "Dầm D5",
-        BeTong: "B15",
+        BeTong: "B15 - M200",
         Thep: "CII",
         ChieuCaoh: 0.6,
         BeRongb: 0.2,

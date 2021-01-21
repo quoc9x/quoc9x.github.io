@@ -202,8 +202,8 @@
 }
 
     .icon.icon-importexcel {
-    background-position: 0 -48px;
-    width: 20px;
+    background-image: url('../../content/images/excel_97_24.png');
+    width: 18px;
     }
 
     .icon.icon-add {
@@ -219,7 +219,8 @@
     }
 
     .icon.icon-beamprocess {
-        background-image: url('../../content/images/Disable16.png'); 
+        background-position: 0 -671.5px;
+        width: 18px;
     }
 
 
