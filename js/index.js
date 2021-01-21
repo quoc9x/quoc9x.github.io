@@ -65,12 +65,47 @@ class EmployeeJS {
         //$('.dialog-modal').show();
         //$('.dialog').show();
         this.showDialogDetail();
+        // Đưa dữ liệu mẫu lên form
+        var beamtemplate = lstBeams[0];
+        var countBeam = lstBeams.length + 1;
+        $("#txtTenDam").val("Dầm D" + countBeam);
+        $("#txtChieuCaoh").val(beamtemplate["ChieuCaoh"]);
+        $("#txtBeRongb").val(beamtemplate["BeRongb"]);
+        $("#txtBeDaySanhf").val(beamtemplate["BeDaySanhf"]);
+        $("#txtNhipDamL").val(beamtemplate["NhipDamL"]);
+        $("#txtKhoangCacha").val(beamtemplate["KhoangCacha"]);
+
+        $("#cboBeTong option:selected").val(beamtemplate["BeTong"]);
+        $("#cboThep option:selected").val(beamtemplate["Thep"]);
+
+        $("#txtMomentM").val(beamtemplate["MomentM"]);
+        /////////////////////////////////////////////////////////////
     }
 
     
 
     btnEditOnClick() {
-        
+        var self = this;
+        // Lấy mã nhân viên được chọn:
+        var STT = this.getEmployeeCodeSelected();
+        if (STT) {
+            // Hiển thị form chi tiết:
+            this.showDialogDetail();
+            // Binding các thông tin của nhân viên lên form
+            var beam = lstBeams[STT];
+            $("#txtTenDam").val(beam["Ten"]);
+            $("#txtChieuCaoh").val(beam["ChieuCaoh"]);
+            $("#txtBeRongb").val(beam["BeRongb"]);
+            $("#txtBeDaySanhf").val(beam["BeDaySanhf"]);
+            $("#txtNhipDamL").val(beam["NhipDamL"]);
+            $("#txtKhoangCacha").val(beam["KhoangCacha"]);
+
+            $( "#cboBeTong option:selected" ).val(beam["BeTong"]);
+            $( "#cboThep option:selected" ).val(beam["Thep"]);
+
+            $("#txtMomentM").val(beam["MomentM"]);
+
+        }
     }
 
 
@@ -80,9 +115,13 @@ class EmployeeJS {
      * Thực hiện cất dữ liệu:
      * */
     btnSaveOnClick() {
+
+        
+
         var beam = {};
-        beam.STT = lstBeams.length;
-        beam.TenDam = $("#txtEmployeeCode").val();
+        beam.STT = lstBeams.length + 1;
+
+        beam.Ten = $("#txtTenDam").val();
         beam.ChieuCaoh = $("#txtChieuCaoh").val();
         beam.BeRongb = $("#txtBeRongb").val();
         beam.BeDaySanhf = $("#txtBeDaySanhf").val();
@@ -91,6 +130,9 @@ class EmployeeJS {
 
         beam.BeTong = $( "#cboBeTong option:selected" ).text();
         beam.Thep = $( "#cboBeTong option:selected" ).text();
+
+        beam.MomentM = $("#txtMomentM").val();
+
         // Thực hiện cất dữ liệu vào database: 
         lstBeams.push(beam);
         // Load lại dữ liệu:
@@ -117,17 +159,17 @@ class EmployeeJS {
      * */
     getEmployeeCodeSelected() {
         // 1. Xác định nhân viên nào được chọn:
-        var employeeCode = null;
-        var trSelected = $("#tbEmployeeList tr.row-selected");
+        var STT = null;
+        var trSelected = $("#tbBeamList tr.row-selected");
         if (trSelected.length > 0){
-            employeeCode = $(trSelected).children()[0].textContent;
+            STT = $(trSelected).children()[0].textContent;
         }
-        return employeeCode;
+        return STT;
     }
 
 
     getID() {
-        var id = $("#tbEmployeeList tr.row-selected[employeeID]");
+        var id = $("#tbBeamList tr.row-selected[STT]");
         return id.attr("employeeID");
     }
 
