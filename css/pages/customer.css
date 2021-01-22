@@ -218,6 +218,10 @@
         background-image: url('../../content/images/Disable16.png'); 
     }
 
+    .icon.icon-infomat {
+        background-image: url('../../content/images/info (1).png'); 
+    }
+
     .icon.icon-beamprocess {
         background-position: 0 -671.5px;
         width: 18px;
