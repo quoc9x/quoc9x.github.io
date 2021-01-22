@@ -14,8 +14,8 @@
     display: none;
     position: absolute;
     /*color: #fff;*/
-    width: 700px;
-    height: 570px;
+    width: 810px;
+    height: 420px;
     border: 3px solid #0973b9;
     border-radius: 3px;
     background-color: #fff;
@@ -25,6 +25,22 @@
     bottom: 0;
 }
 
+.dialog-material {
+    display: none;
+    position: absolute;
+    /*color: #fff;*/
+    width: 640px;
+    height: 315px;
+    border: 3px solid #0973b9;
+    border-radius: 3px;
+    background-color: #fff;
+    top: calc(50% - 270px);
+    left: calc(50% - 300px);
+    right: 0;
+    bottom: 0;
+}
+
+/* Các thuộc tính CSS của form Add */
     .dialog .dialog-title {
         display: flex;
         height: 25px;
@@ -65,6 +81,54 @@
         .dialog .dialog-footer button{
             margin-right: 10px;
         }
+/* /////////////////////////////////////////////////// */
+
+
+
+/* Các thuộc tính CSS của form thông tin vật liệu */
+        .dialog-material .dialog-title {
+            display: flex;
+            height: 25px;
+            color: #fff;
+            line-height: 22px;
+            /*width: 600px;*/
+            background-color: #0973b9;
+        }
+    
+            .dialog-material .dialog-title .title-close-bottom {
+                position: absolute;
+                right: 0;
+                border: 1px solid #ff0000;
+                width: 16px;
+                height: 16px;
+                background-image: url('../../content/images/cancel.png');
+                background-repeat: no-repeat;
+                border-radius: 50%;
+                background-position: center;
+                cursor: pointer;
+            }
+    
+        .dialog-material .dialog-body {
+            padding: 10px;
+            background-color: #fff;
+            height: calc(100% - 85px);
+        }
+    
+        .dialog-material .dialog-footer {
+            height:40px;
+            width: 100%;
+            border-top: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+    
+            .dialog-material .dialog-footer button{
+                margin-right: 10px;
+            }
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+
+
 
 
         input {

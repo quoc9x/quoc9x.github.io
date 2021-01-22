@@ -16,10 +16,14 @@ class EmployeeJS {
 
     initEvents() {
         $('#btnAdd').click(this.btnAddOnClick.bind(this));
+        $('#btnInfoMat').click(this.btnInFoMatOnClick.bind(this));
         $('#btnSave').click(this.btnSaveOnClick.bind(this));
+        $('#btnOk').click(this.btnOkOnClick.bind(this));
         $('#btnEdit').click(this.btnEditOnClick.bind(this));
         $('#btnCancel').click(this.btnCancelOnClick.bind(this));
         $('.title-close-bottom').click(this.btnCancelOnClick.bind(this));
+        $('.title-close-bottomM').click(this.btnCancelOnClickM.bind(this));
+
         //$("#txtEmployeeCode").blur(this.checkRequired);
         //$("#txtEmployeeName").blur(this.checkRequired);
         // Cách 1: Dùng class
@@ -80,6 +84,13 @@ class EmployeeJS {
 
         $("#txtMomentM").val(beamtemplate["MomentM"]);
         /////////////////////////////////////////////////////////////
+    }
+
+
+    btnInFoMatOnClick() {
+       
+        this.showDialogDetailM();
+        
     }
 
     
@@ -163,6 +174,9 @@ class EmployeeJS {
         this.hideDialogDetail();
     }
 
+    btnOkOnClick() {
+        this.hideDialogDetailM();
+    }
     
 
     btnDeleteOnClick() {
@@ -219,7 +233,16 @@ class EmployeeJS {
         //alert('add');
         //$('.dialog-modal').hide();
         //$('.dialog').hide();
+        
         this.hideDialogDetail();
+    }
+
+    btnCancelOnClickM() {
+        //alert('add');
+        //$('.dialog-modal').hide();
+        //$('.dialog').hide();
+        
+        this.hideDialogDetailM();
     }
     /*
      * Hiển thị dialog chi tiết 
@@ -230,7 +253,15 @@ class EmployeeJS {
         $('.dialog input').val(null);
         $('.dialog-modal').show();
         $('.dialog').show();
-        $("#txtEmployeeCode").focus();
+        $("#txtTenDam").focus();
+    }
+
+    showDialogDetailM() {
+        // Clean tất cả các giá trị cũ trên các input trong form:
+        $('.dialog input').val(null);
+        $('.dialog-modal').show();
+        $('.dialog-material').show();
+        //$("#txtTenDam").focus();
     }
 
     /*
@@ -240,6 +271,11 @@ class EmployeeJS {
     hideDialogDetail() {
         $('.dialog-modal').hide();
         $('.dialog').hide();
+    }
+
+    hideDialogDetailM() {
+        $('.dialog-modal').hide();
+        $('.dialog-material').hide();
     }
 
 
