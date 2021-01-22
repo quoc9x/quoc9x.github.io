@@ -27,6 +27,8 @@ class EmployeeJS {
         $('#cboBeTongM').change(this.cboBeTongMOnChange.bind(this));
         $('#cboThepM').change(this.cboThepMOnChange.bind(this));
 
+        $('#btnBeamProcess').click(this.btnBeamProcessOnClick.bind(this));
+
 
         //$("#txtEmployeeCode").blur(this.checkRequired);
         //$("#txtEmployeeName").blur(this.checkRequired);
@@ -44,7 +46,7 @@ class EmployeeJS {
         $('.gridbar tbody').empty();
         $.each(lstBeams, function (index, items) {
             var trHTML = $(`<tr>
-            <td>`+ items.STT + `</td>
+            <td>`+ items.beamID + `</td>
             <td>`+ items.Ten + `</td>
             <td>`+ items.BeTong + `</td>
             <td>`+ items.Thep + `</td>
@@ -54,7 +56,7 @@ class EmployeeJS {
             <td>`+ items.NhipDamL + `</td>
             <td>`+ items.KhoangCacha + `</td>
             <td>`+ items.MomentM + `</td>
-            <td>`+ "Chưa được tính toán" + `</td>
+            <td>`+ items.KetQua + `</td>
                 </tr>`);
             $('.gridbar tbody').append(trHTML);
         })
@@ -73,9 +75,6 @@ class EmployeeJS {
         $('#txtmuyMin').val(0.003);
         $('#txtmuyMax').val(2.267);
 
-
-
-
     }
 
     rowOnSelect() {
@@ -89,21 +88,21 @@ class EmployeeJS {
         //$('.dialog-modal').show();
         //$('.dialog').show();
         this.showDialogDetail();
-        
+
         // Đưa dữ liệu mẫu lên form
-        var beamtemplate = lstBeams[0];
-        var countBeam = lstBeams.length + 1;
-        $("#txtTenDam").val("Dầm D" + countBeam);
-        $("#txtChieuCaoh").val(beamtemplate["ChieuCaoh"]);
-        $("#txtBeRongb").val(beamtemplate["BeRongb"]);
-        $("#txtBeDaySanhf").val(beamtemplate["BeDaySanhf"]);
-        $("#txtNhipDamL").val(beamtemplate["NhipDamL"]);
-        $("#txtKhoangCacha").val(beamtemplate["KhoangCacha"]);
+        var countBeam = 0;
+        countBeam = lstBeams.length + 1;
+        $("#txtTenDam").val("D" + countBeam);
+        $("#txtChieuCaoh").val(0.6);
+        $("#txtBeRongb").val(0.2);
+        $("#txtBeDaySanhf").val(0.1);
+        $("#txtNhipDamL").val(3);
+        $("#txtKhoangCacha").val(0.03);
 
-        $("#cboBeTong option:selected").val(beamtemplate["BeTong"]);
-        $("#cboThep option:selected").val(beamtemplate["Thep"]);
+        $("#cboBeTong option:selected").val("B12.5 - M150");
+        $("#cboThep option:selected").val("CI - AI");
 
-        $("#txtMomentM").val(beamtemplate["MomentM"]);
+        $("#txtMomentM").val(150);
         /////////////////////////////////////////////////////////////
     }
 
@@ -120,13 +119,13 @@ class EmployeeJS {
         var self = this;
         this.FormMode = "edit";
         // Lấy mã nhân viên được chọn:
-        var STT = this.getEmployeeCodeSelected();
-        if (STT != null) {
-            STT--;
+        var beamID = this.getEmployeeCodeSelected();
+        if (beamID != null) {
+            beamID--;
             // Hiển thị form chi tiết:
             this.showDialogDetail();
             // Binding các thông tin của nhân viên lên form
-            var beam = lstBeams[STT];
+            var beam = lstBeams[beamID];
             $("#txtTenDam").val(beam.Ten);
             $("#txtChieuCaoh").val(beam.ChieuCaoh);
             $("#txtBeRongb").val(beam.BeRongb);
@@ -144,7 +143,6 @@ class EmployeeJS {
             alert("Chưa chọn dầm để sửa");
         }
 
-
     }
 
 
@@ -154,45 +152,57 @@ class EmployeeJS {
      * Thực hiện cất dữ liệu:
      * */
     btnSaveOnClick() {
-
+        // Kiểm tra dữ liệu trước khi lưu
+        var inputRequireds = $("[required]");
+        var isValid = true;
+        $.each(inputRequireds, function (index, input) {
+            debugger;
+            var valid = $(input).trigger("blur");
+            if (isValid && valid.hasClass("required-error")) {
+                isValid = false; 
+            }
+        })
         // Thực hiện cất dữ liệu vào database:
         // Kiểm tra xem sửa hay thêm mới
-        if (this.FormMode === "add") {
-            var beam = {};
-            beam.STT = lstBeams.length + 1;
-
-            beam.Ten = $("#txtTenDam").val();
-            beam.ChieuCaoh = $("#txtChieuCaoh").val();
-            beam.BeRongb = $("#txtBeRongb").val();
-            beam.BeDaySanhf = $("#txtBeDaySanhf").val();
-            beam.NhipDamL = $("#txtNhipDamL").val();
-            beam.KhoangCacha = $("#txtKhoangCacha").val();
-
-            beam.BeTong = $("#cboBeTong option:selected").text();
-            beam.Thep = $("#cboThep option:selected").text();
-
-            beam.MomentM = $("#txtMomentM").val();
-
-            lstBeams.push(beam);
+        if (isValid){
+            if (this.FormMode === "add") {
+                var beam = {};
+                beam.beamID = lstBeams.length + 1;
+    
+                beam.Ten = $("#txtTenDam").val();
+                beam.ChieuCaoh = $("#txtChieuCaoh").val();
+                beam.BeRongb = $("#txtBeRongb").val();
+                beam.BeDaySanhf = $("#txtBeDaySanhf").val();
+                beam.NhipDamL = $("#txtNhipDamL").val();
+                beam.KhoangCacha = $("#txtKhoangCacha").val();
+    
+                beam.BeTong = $("#cboBeTong option:selected").text();
+                beam.Thep = $("#cboThep option:selected").text();
+    
+                beam.MomentM = $("#txtMomentM").val();
+    
+                lstBeams.push(beam);
+            }
+            else if (this.FormMode === "edit") {
+                var beamID = this.getEmployeeCodeSelected();
+                beamID--;
+                lstBeams[beamID].Ten = $("#txtTenDam").val();
+                lstBeams[beamID].ChieuCaoh = $("#txtChieuCaoh").val();
+                lstBeams[beamID].BeRongb = $("#txtBeRongb").val();
+                lstBeams[beamID].BeDaySanhf = $("#txtBeDaySanhf").val();
+                lstBeams[beamID].NhipDamL = $("#txtNhipDamL").val();
+                lstBeams[beamID].KhoangCacha = $("#txtKhoangCacha").val();
+    
+                lstBeams[beamID].BeTong = $("#cboBeTong option:selected").text();
+                lstBeams[beamID].Thep = $("#cboThep option:selected").text();
+    
+                lstBeams[beamID].MomentM = $("#txtMomentM").val();
+            }
+            // Load lại dữ liệu:
+            this.loadData();
+            this.hideDialogDetail();
         }
-        else if (this.FormMode === "edit") {
-            var STT = this.getEmployeeCodeSelected();
-            STT--;
-            lstBeams[STT].Ten = $("#txtTenDam").val();
-            lstBeams[STT].ChieuCaoh = $("#txtChieuCaoh").val();
-            lstBeams[STT].BeRongb = $("#txtBeRongb").val();
-            lstBeams[STT].BeDaySanhf = $("#txtBeDaySanhf").val();
-            lstBeams[STT].NhipDamL = $("#txtNhipDamL").val();
-            lstBeams[STT].KhoangCacha = $("#txtKhoangCacha").val();
-
-            lstBeams[STT].BeTong = $("#cboBeTong option:selected").text();
-            lstBeams[STT].Thep = $("#cboThep option:selected").text();
-
-            lstBeams[STT].MomentM = $("#txtMomentM").val();
-        }
-        // Load lại dữ liệu:
-        this.loadData();
-        this.hideDialogDetail();
+        
     }
 
     btnOkOnClick() {
@@ -203,11 +213,12 @@ class EmployeeJS {
     btnDeleteOnClick() {
         var self = this;
         // Lấy mã nhân viên được chọn:
-        var employeeID = this.getID();
-        if (employeeID) {
-
+        var beamID = this.getEmployeeCodeSelected();
+        if (beamID) {
+            lstBeams.splice(beamID - 1,1);
+            this.loadData();
         } else {
-
+            alert('Chưa có dầm nào được chọn');
         }
 
     }
@@ -217,17 +228,17 @@ class EmployeeJS {
      * */
     getEmployeeCodeSelected() {
         // 1. Xác định nhân viên nào được chọn:
-        var STT = null;
+        var beamID = null;
         var trSelected = $("#tbBeamList tr.row-selected");
         if (trSelected.length > 0) {
-            STT = $(trSelected).children()[0].textContent;
+            beamID = $(trSelected).children()[0].textContent;
         }
-        return STT;
+        return beamID;
     }
 
 
     getID() {
-        var id = $("#tbBeamList tr.row-selected[STT]");
+        var id = $("#tbBeamList tr.row-selected[beamID]");
         return id.attr("employeeID");
     }
 
@@ -282,7 +293,7 @@ class EmployeeJS {
         $('.dialog input').val(null);
         $('.dialog-modal').show();
         $('.dialog-material').show();
-        //$("#txtTenDam").focus();
+        $("#txtTenDam").focus();
     }
 
     /*
@@ -446,12 +457,21 @@ class EmployeeJS {
 
     }
 
+    btnBeamProcessOnClick() {
+        beamProcess = new BeamProcess();
+        for (const beam of lstBeams){
+            beamProcess.TinhThepHCN
+            beam.KetQua = "Đã tính toán xong - Xem kết quả";
+        }
+        this.loadData();
+    }
+
 
 }
 
 var lstBeams = [
     {
-        STT: 1,
+        beamID: 1,
         Ten: "Dầm D1",
         BeTong: "B15 - M200",
         Thep: "CII",
@@ -464,7 +484,7 @@ var lstBeams = [
         KetQua: "Chưa tính toán"
     },
     {
-        STT: 2,
+        beamID: 2,
         Ten: "Dầm D2",
         BeTong: "B15 - M200",
         Thep: "CII",
@@ -477,7 +497,7 @@ var lstBeams = [
         KetQua: "Chưa tính toán"
     },
     {
-        STT: 3,
+        beamID: 3,
         Ten: "Dầm D3",
         BeTong: "B15 - M200",
         Thep: "CII",
@@ -490,7 +510,7 @@ var lstBeams = [
         KetQua: "Chưa tính toán"
     },
     {
-        STT: 4,
+        beamID: 4,
         Ten: "Dầm D4",
         BeTong: "B15 - M200",
         Thep: "CII",
@@ -503,7 +523,7 @@ var lstBeams = [
         KetQua: "Chưa tính toán"
     },
     {
-        STT: 5,
+        beamID: 5,
         Ten: "Dầm D5",
         BeTong: "B15 - M200",
         Thep: "CII",

@@ -17,7 +17,9 @@
             <div class="iconbar"></div>
             <!--Example: inline
             <div class="iconbar" style="width:200px"></div>-->
-            <div class="logo-text"></div>
+            <div class="logo-text">
+                <span class="logo-textt">NUCE</span>
+            </div>
         </div>
         <!--Menu-item-->
         <div id="menu-content">
@@ -75,7 +77,7 @@
                     <table id="tbBeamList" border="1" cellpadding="0">
                         <thead>
                             <tr>
-                                <th>STT</th>
+                                <th>ID</th>
                                 <th>Tên dầm</th>
                                 <th>Bê tông</th>
                                 <th>Thép</th>
@@ -136,15 +138,15 @@
                 </div>
                 <div class="row-right">
                     <label>Bề dày sàn hf (m)</label>
-                    <input id="txtBeDaySanhf" type="tel" />
+                    <input id="txtBeDaySanhf" required type="text" />
                 </div>
                 <div class="row">
                     <label>Nhịp dầm L (m)</label>
-                    <input id="txtNhipDamL" type="text" />
+                    <input id="txtNhipDamL" required type="text" />
                 </div>
                 <div class="row">
                     <label>Khoảng cách a (m)</label>
-                    <input id="txtKhoangCacha" type="text" />
+                    <input id="txtKhoangCacha" required type="text" />
                 </div>
 
             </fieldset>
@@ -184,7 +186,7 @@
                 <legend>Nội lực:</legend>
                 <div class="row">
                     <label>Mô men (kNm)</label>
-                    <input id="txtMomentM" type="text" />
+                    <input id="txtMomentM" required type="text" />
                 </div>
             </fieldset>
             <div style="float: right;">
@@ -233,15 +235,15 @@
                 </div>
                 <div class="row">
                     <label>Rb (T)</label>
-                    <input id="txtRb" type="text" />
+                    <input id="txtRb" required type="text" />
                 </div>
                 <div class="row">
                     <label>Rbt (T)</label>
-                    <input id="txtRbt" type="text" />
+                    <input id="txtRbt" required type="text" />
                 </div>
                 <div class="row">
                     <label>Eb (T)</label>
-                    <input id="txtEb" type="text" />
+                    <input id="txtEb" required type="text" />
                 </div>
             </fieldset>
 
@@ -261,15 +263,15 @@
                     </select>
                     <div class="row">
                         <label>Rs (T)</label>
-                        <input id="txtRs" type="text" />
+                        <input id="txtRs" required type="text" />
                     </div>
                     <div class="row">
                         <label>Rsc (T)</label>
-                        <input id="txtRsc" type="text" />
+                        <input id="txtRsc" required type="text" />
                     </div>
                     <div class="row">
                         <label>Es (T)</label>
-                        <input id="txtEs" type="text" />
+                        <input id="txtEs" required type="text" />
                     </div>
                 </div>
             </fieldset>
@@ -281,19 +283,19 @@
                 <legend>Hệ số:</legend>
                 <div class="row">
                     <label>alphaR:</label>
-                    <input id="txtalphaR" type="text" />
+                    <input id="txtalphaR" required type="text" />
                 </div>
                 <div class="row">
                     <label>xiR:</label>
-                    <input id="txtxiR" type="text" />
+                    <input id="txtxiR" required type="text" />
                 </div>
                 <div class="row">
                     <label>muyMin (%):</label>
-                    <input id="txtmuyMin" type="text" />
+                    <input id="txtmuyMin" required type="text" />
                 </div>
                 <div class="row">
                     <label>muyMax (%):</label>
-                    <input id="txtmuyMax" type="text" />
+                    <input id="txtmuyMax" required type="text" />
                 </div>
             </fieldset>
 

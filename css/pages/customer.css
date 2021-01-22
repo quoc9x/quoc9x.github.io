@@ -82,8 +82,20 @@
     width: calc(100% - 50px);
     height: 100%;
     /* background-image: url('../../content/images/logo-text.png'); */
+    /* background-image: url('../../content/my_images/icon_text_03.png'); */
     background-repeat: no-repeat;
+    background-position: unset;
+}
+
+#logo .logo-textt{
+    /* float: top; */
+    width: calc(100% - 50px);
+    height: 100%;
+    color: white;
+    font-size: 37px;
     background-position: center;
+    letter-spacing: 4px;
+    font: 150%;
 }
 
 .menu-item {
