@@ -24,6 +24,10 @@ class EmployeeJS {
         $('.title-close-bottom').click(this.btnCancelOnClick.bind(this));
         $('.title-close-bottomM').click(this.btnCancelOnClickM.bind(this));
 
+        $('#cboBeTongM').change(this.cboBeTongMOnChange.bind(this));
+        $('#cboThepM').change(this.cboThepMOnChange.bind(this));
+
+
         //$("#txtEmployeeCode").blur(this.checkRequired);
         //$("#txtEmployeeName").blur(this.checkRequired);
         // Cách 1: Dùng class
@@ -36,7 +40,7 @@ class EmployeeJS {
 
 
     loadData() {
-        
+
         $('.gridbar tbody').empty();
         $.each(lstBeams, function (index, items) {
             var trHTML = $(`<tr>
@@ -55,6 +59,22 @@ class EmployeeJS {
             $('.gridbar tbody').append(trHTML);
         })
 
+        $('#txtRb').val(750);
+        $('#txtRbt').val(66);
+        $('#txtEb').val(2100000);
+
+        $('#txtRs').val(22500);
+        $('#txtRsc').val(22500);
+        $('#txtEs').val(21000000);
+
+        $('#txtalphaR').val(0.449);
+        $('#txtxiR').val(0.68);
+
+        $('#txtmuyMin').val(0.003);
+        $('#txtmuyMax').val(2.267);
+
+
+
 
     }
 
@@ -69,6 +89,7 @@ class EmployeeJS {
         //$('.dialog-modal').show();
         //$('.dialog').show();
         this.showDialogDetail();
+        
         // Đưa dữ liệu mẫu lên form
         var beamtemplate = lstBeams[0];
         var countBeam = lstBeams.length + 1;
@@ -88,12 +109,12 @@ class EmployeeJS {
 
 
     btnInFoMatOnClick() {
-       
+
         this.showDialogDetailM();
-        
+
     }
 
-    
+
 
     btnEditOnClick() {
         var self = this;
@@ -113,17 +134,17 @@ class EmployeeJS {
             $("#txtNhipDamL").val(beam.NhipDamL);
             $("#txtKhoangCacha").val(beam.KhoangCacha);
 
-            $( "#cboBeTong option:selected" ).val(beam.BeTong);
-            $( "#cboThep option:selected" ).val(beam.Thep);
+            $("#cboBeTong option:selected").val(beam.BeTong);
+            $("#cboThep option:selected").val(beam.Thep);
 
             $("#txtMomentM").val(beam.MomentM);
 
         }
-        else{
+        else {
             alert("Chưa chọn dầm để sửa");
         }
-        
-        
+
+
     }
 
 
@@ -136,7 +157,7 @@ class EmployeeJS {
 
         // Thực hiện cất dữ liệu vào database:
         // Kiểm tra xem sửa hay thêm mới
-        if (this.FormMode === "add"){
+        if (this.FormMode === "add") {
             var beam = {};
             beam.STT = lstBeams.length + 1;
 
@@ -154,7 +175,7 @@ class EmployeeJS {
 
             lstBeams.push(beam);
         }
-        else if (this.FormMode === "edit"){
+        else if (this.FormMode === "edit") {
             var STT = this.getEmployeeCodeSelected();
             STT--;
             lstBeams[STT].Ten = $("#txtTenDam").val();
@@ -177,14 +198,14 @@ class EmployeeJS {
     btnOkOnClick() {
         this.hideDialogDetailM();
     }
-    
+
 
     btnDeleteOnClick() {
         var self = this;
         // Lấy mã nhân viên được chọn:
         var employeeID = this.getID();
         if (employeeID) {
-            
+
         } else {
 
         }
@@ -198,7 +219,7 @@ class EmployeeJS {
         // 1. Xác định nhân viên nào được chọn:
         var STT = null;
         var trSelected = $("#tbBeamList tr.row-selected");
-        if (trSelected.length > 0){
+        if (trSelected.length > 0) {
             STT = $(trSelected).children()[0].textContent;
         }
         return STT;
@@ -233,7 +254,7 @@ class EmployeeJS {
         //alert('add');
         //$('.dialog-modal').hide();
         //$('.dialog').hide();
-        
+
         this.hideDialogDetail();
     }
 
@@ -241,7 +262,7 @@ class EmployeeJS {
         //alert('add');
         //$('.dialog-modal').hide();
         //$('.dialog').hide();
-        
+
         this.hideDialogDetailM();
     }
     /*
@@ -278,12 +299,154 @@ class EmployeeJS {
         $('.dialog-material').hide();
     }
 
+    cboBeTongMOnChange() {
+        var index = $("#cboBeTongM option:selected").val();
+        index = parseInt(index);
+        switch (index) {
+            case 0: {
+                $('#txtRb').val(750);
+                $('#txtRbt').val(66);
+                $('#txtEb').val(2100000);
+                break;
+            }
+            case 1: {
+                $('#txtRb').val(850);
+                $('#txtRbt').val(75);
+                $('#txtEb').val(2300000);
+                break;
+            }
+            case 2: {
+                $('#txtRb').val(1150);
+                $('#txtRbt').val(90);
+                $('#txtEb').val(2700000);
+                break;
+            }
+            case 3: {
+                $('#txtRb').val(1450);
+                $('#txtRbt').val(105);
+                $('#txtEb').val(3000000);
+                break;
+            }
+            case 4: {
+                $('#txtRb').val(1700);
+                $('#txtRbt').val(120);
+                $('#txtEb').val(3250000);
+                break;
+            }
+            case 5: {
+                $('#txtRb').val(1950);
+                $('#txtRbt').val(130);
+                $('#txtEb').val(3450000);
+                break;
+            }
+            case 6: {
+                $('#txtRb').val(2200);
+                $('#txtRbt').val(140);
+                $('#txtEb').val(3600000);
+                break;
+            }
+            case 7: {
+                $('#txtRb').val(2500);
+                $('#txtRbt').val(145);
+                $('#txtEb').val(3750000);
+                break;
+            }
+        }
 
-}
+        var Rb = $('#txtRb').val();
+        var Rbt = $('#txtRbt').val();
+        var Eb = $('#txtEb').val();
 
-// Hàm load dữ liệu:
-function loadData() {
-    
+        var Rs = $('#txtRs').val();
+        var Rsc = $('#txtRsc').val();
+        var Es = $('#txtEs').val();
+
+        var xiR = (0.85 - 0.008 * (Rb / 100)) / (1 + (Rs / 40000) * (1 - (0.85 - 0.008 * (Rb / 100)) / 1.1));
+        var alphaR = xiR * (1-0.5*xiR);
+        var muyMax = xiR * Rb * 100 / Rs;
+
+        $('#txtxiR').val(Math.round(xiR * 1000) / 1000);
+        $('#txtalphaR').val(Math.round(alphaR * 1000) / 1000);
+        $('#txtmuyMax').val(Math.round(muyMax * 1000) / 1000);
+
+    }
+
+
+    cboThepMOnChange() {
+        var index = $("#cboThepM option:selected").val();
+        index = parseInt(index);
+        switch (index) {
+            case 0: {
+                $('#txtRs').val(22500);
+                $('#txtRsc').val(22500);
+                $('#txtEs').val(21000000);
+                break;
+            }
+            case 1: {
+                $('#txtRs').val(28000);
+                $('#txtRsc').val(28000);
+                $('#txtEs').val(21000000);
+                break;
+            }
+            case 2: {
+                $('#txtRs').val(33500);
+                $('#txtRsc').val(33500);
+                $('#txtEs').val(20000000);
+                break;
+            }
+            case 3: {
+                $('#txtRs').val(36500);
+                $('#txtRsc').val(36500);
+                $('#txtEs').val(20000000);
+                break;
+            }
+            case 4: {
+                $('#txtRs').val(51000);
+                $('#txtRsc').val(35000);
+                $('#txtEs').val(19000000);
+                break;
+            }
+            case 5: {
+                $('#txtRs').val(68000);
+                $('#txtRsc').val(50000);
+                $('#txtEs').val(19000000);
+                break;
+            }
+            case 6: {
+                $('#txtRs').val(81500);
+                $('#txtRsc').val(50000);
+                $('#txtEs').val(19000000);
+                break;
+            }
+            case 7: {
+                $('#txtRs').val(98000);
+                $('#txtRsc').val(50000);
+                $('#txtEs').val(19000000);
+                break;
+            }
+
+            
+        }
+
+        var Rb = $('#txtRb').val();
+        var Rbt = $('#txtRbt').val();
+        var Eb = $('#txtEb').val();
+
+        var Rs = $('#txtRs').val();
+        var Rsc = $('#txtRsc').val();
+        var Es = $('#txtEs').val();
+
+        var xiR = (0.85 - 0.008 * (Rb / 100)) / (1 + (Rs / 40000) * (1 - (0.85 - 0.008 * (Rb / 100)) / 1.1));
+        var alphaR = xiR * (1 - 0.5 * xiR);
+        var muyMax = xiR * Rb * 100 / Rs;
+
+        $('#txtxiR').val(Math.round(xiR * 1000) / 1000);
+        $('#txtalphaR').val(Math.round(alphaR * 1000) / 1000);
+        $('#txtmuyMax').val(Math.round(muyMax * 1000) / 1000);
+
+    }
+
+
 }
 
 var lstBeams = [

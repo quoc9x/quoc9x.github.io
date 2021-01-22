@@ -153,7 +153,7 @@
                 <legend>Vật liệu:</legend>
                 <div class="row">
                     <label>Bê tông</label>
-                    <select name="cboBeTong" id="cboBeTong">
+                    <select id="cboBeTong">
                         <option value="1">B12.5 - M150</option>
                         <option value="2">B15 - M200</option>
                         <option value="3">B20 - M250</option>
@@ -166,11 +166,15 @@
                 </div>
                 <div class="row">
                     <label>Thép</label>
-                    <select name="cboThep" id="cboThep">
+                    <select id="cboThep">
                         <option value="1">CI - AI</option>
                         <option value="2">CII - AII</option>
-                        <option value="2">CIII - AIII</option>
-                        <option value="2">CIV - AIV</option>
+                        <option value="3">CIII - AIII (6-8)</option>
+                        <option value="4">CIII - AIII (10-40)</option>
+                        <option value="5">CIV - AIV</option>
+                        <option value="6">AV</option>
+                        <option value="7">AVI</option>
+                        <option value="8">ATVII</option>
 
                     </select>
                 </div>
@@ -216,28 +220,28 @@
                 <legend>Bê tông:</legend>
                 <div class="row">
                     <label>Bê tông</label>
-                    <select name="cboBeTong" id="cboBeTong">
-                        <option value="1">B12.5 - M150</option>
-                        <option value="2">B15 - M200</option>
-                        <option value="3">B20 - M250</option>
-                        <option value="4">B25 - M350</option>
-                        <option value="5">B30 - M400</option>
-                        <option value="6">B35 - M450</option>
-                        <option value="7">B40 - M500</option>
-                        <option value="8">B45 - M600</option>
+                    <select id="cboBeTongM">
+                        <option value="0">B12.5 - M150</option>
+                        <option value="1">B15 - M200</option>
+                        <option value="2">B20 - M250</option>
+                        <option value="3">B25 - M350</option>
+                        <option value="4">B30 - M400</option>
+                        <option value="5">B35 - M450</option>
+                        <option value="6">B40 - M500</option>
+                        <option value="7">B45 - M600</option>
                     </select>
                 </div>
                 <div class="row">
                     <label>Rb (T)</label>
-                    <input id="txtMomentM" type="text" />
+                    <input id="txtRb" type="text" />
                 </div>
                 <div class="row">
                     <label>Rbt (T)</label>
-                    <input id="txtMomentM" type="text" />
+                    <input id="txtRbt" type="text" />
                 </div>
                 <div class="row">
                     <label>Eb (T)</label>
-                    <input id="txtMomentM" type="text" />
+                    <input id="txtEb" type="text" />
                 </div>
             </fieldset>
 
@@ -245,27 +249,27 @@
                 <legend>Thép:</legend>
                 <div class="row">
                     <label>Thép</label>
-                    <select name="cboThep" id="cboThep">
-                        <option value="1">CI - AI</option>
-                        <option value="2">CII - AII</option>
-                        <option value="3">CIII - AIII (6-8)</option>
-                        <option value="4">CIII - AIII (10-40)</option>
-                        <option value="5">CIV - AIV</option>
-                        <option value="6">AV</option>
-                        <option value="7">AVI</option>
-                        <option value="8">ATVII</option>
+                    <select id="cboThepM">
+                        <option value="0">CI - AI</option>
+                        <option value="1">CII - AII</option>
+                        <option value="2">CIII - AIII (6-8)</option>
+                        <option value="3">CIII - AIII (10-40)</option>
+                        <option value="4">CIV - AIV</option>
+                        <option value="5">AV</option>
+                        <option value="6">AVI</option>
+                        <option value="7">ATVII</option>
                     </select>
                     <div class="row">
                         <label>Rs (T)</label>
-                        <input id="txtMomentM" type="text" />
+                        <input id="txtRs" type="text" />
                     </div>
                     <div class="row">
                         <label>Rsc (T)</label>
-                        <input id="txtMomentM" type="text" />
+                        <input id="txtRsc" type="text" />
                     </div>
                     <div class="row">
                         <label>Es (T)</label>
-                        <input id="txtMomentM" type="text" />
+                        <input id="txtEs" type="text" />
                     </div>
                 </div>
             </fieldset>
@@ -285,11 +289,11 @@
                 </div>
                 <div class="row">
                     <label>muyMin (%):</label>
-                    <input id="txtMomentM" type="text" />
+                    <input id="txtmuyMin" type="text" />
                 </div>
                 <div class="row">
-                    <label>muyMax(%):</label>
-                    <input id="txtMomentM" type="text" />
+                    <label>muyMax (%):</label>
+                    <input id="txtmuyMax" type="text" />
                 </div>
             </fieldset>
 
