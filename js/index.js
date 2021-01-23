@@ -105,7 +105,7 @@ class EmployeeJS {
         $("#cboThep option:selected").val("CI - AI");
 
         $("#txtMomentM").val(150);
-        $("#txtMomentM").val(0.03);
+        $("#txtMuyMin").val(0.00003);
         /////////////////////////////////////////////////////////////
     }
 
@@ -518,11 +518,11 @@ class EmployeeJS {
                 var h0 = beam.ChieuCaoh - beam.KhoangCacha;
                 As = TinhThepHCT(beam.NhipDamL, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
                     beam.MomentM, beam.BeDaySanhf, beTongOnProcess.Rb, h0,
-                    heSoOnProcess.xiR, thepOnChange.Rs);
+                    heSoOnProcess.xiR, thepOnProcess.Rs);
             }
 
 
-            beam.KetQua = "As = " + As + " (cm^2) - Click";
+            beam.KetQua = "As = " + As + " (cm^2) - Click xem chi tiết";
         }
         this.loadData();
     }
@@ -534,71 +534,71 @@ var lstBeams = [
     {
         beamID: 1,
         Ten: "Dầm D1",
-        BeTong: "B15 - M200",
-        Thep: "CII",
+        BeTong: "B30 - M400",
+        Thep: "CIII",
         ChieuCaoh: 0.6,
         BeRongb: 0.2,
         BeDaySanhf: 0.1,
         NhipDamL: 3,
         KhoangCacha: 0.03,
-        MuyMin: 0.03,
-        MomentM: 125,
+        MuyMin: 0.00003,
+        MomentM: 15,
         KetQua: "Chưa tính toán"
     },
     {
         beamID: 2,
         Ten: "Dầm D2",
-        BeTong: "B15 - M200",
+        BeTong: "B30 - M400",
         Thep: "CII",
         ChieuCaoh: 0.6,
         BeRongb: 0.2,
         BeDaySanhf: 0.1,
         NhipDamL: 3,
         KhoangCacha: 0.03,
-        MuyMin: 0.03,
-        MomentM: 125,
+        MuyMin: 0.00003,
+        MomentM: 20,
         KetQua: "Chưa tính toán"
     },
     {
         beamID: 3,
         Ten: "Dầm D3",
-        BeTong: "B15 - M200",
+        BeTong: "B30 - M400",
         Thep: "CII",
         ChieuCaoh: 0.6,
         BeRongb: 0.2,
         BeDaySanhf: 0.1,
         NhipDamL: 3,
         KhoangCacha: 0.03,
-        MuyMin: 0.03,
-        MomentM: 125,
+        MuyMin: 0.00003,
+        MomentM: 25,
         KetQua: "Chưa tính toán"
     },
     {
         beamID: 4,
         Ten: "Dầm D4",
-        BeTong: "B15 - M200",
-        Thep: "CII",
+        BeTong: "B30 - M400",
+        Thep: "CIII - AIII (10-40)",
         ChieuCaoh: 0.6,
         BeRongb: 0.2,
         BeDaySanhf: 0.1,
         NhipDamL: 3,
         KhoangCacha: 0.03,
-        MuyMin: 0.03,
-        MomentM: 125,
+        MuyMin: 0.00003,
+        MomentM: 30,
         KetQua: "Chưa tính toán"
     },
     {
         beamID: 5,
         Ten: "Dầm D5",
-        BeTong: "B15 - M200",
+        BeTong: "B30 - M400",
         Thep: "CII",
         ChieuCaoh: 0.6,
         BeRongb: 0.2,
         BeDaySanhf: 0.1,
         NhipDamL: 3,
         KhoangCacha: 0.03,
-        MuyMin: 0.03,
-        MomentM: 125,
+        MuyMin: 0.00003,
+        MomentM: 35,
         KetQua: "Chưa tính toán"
     }
 ]
