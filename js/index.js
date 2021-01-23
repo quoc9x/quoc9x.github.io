@@ -162,31 +162,31 @@ class EmployeeJS {
             debugger;
             var valid = $(input).trigger("blur");
             if (isValid && valid.hasClass("required-error")) {
-                isValid = false; 
+                isValid = false;
             }
         })
         // Thực hiện cất dữ liệu vào database:
         // Kiểm tra xem sửa hay thêm mới
-        if (isValid){
+        if (isValid) {
             if (this.FormMode === "add") {
                 var beam = {};
                 beam.beamID = lstBeams.length + 1;
-    
+
                 beam.Ten = $("#txtTenDam").val();
                 beam.ChieuCaoh = $("#txtChieuCaoh").val();
                 beam.BeRongb = $("#txtBeRongb").val();
                 beam.BeDaySanhf = $("#txtBeDaySanhf").val();
                 beam.NhipDamL = $("#txtNhipDamL").val();
                 beam.KhoangCacha = $("#txtKhoangCacha").val();
-    
+
                 beam.BeTong = $("#cboBeTong option:selected").text();
                 beam.Thep = $("#cboThep option:selected").text();
-    
+
                 beam.MomentM = $("#txtMomentM").val();
                 beam.MuyMin = $("#txtMuyMin").val();
-                
+
                 beam.KetQua = "Chưa tính toán";
-    
+
                 lstBeams.push(beam);
             }
             else if (this.FormMode === "edit") {
@@ -198,10 +198,10 @@ class EmployeeJS {
                 lstBeams[beamID].BeDaySanhf = $("#txtBeDaySanhf").val();
                 lstBeams[beamID].NhipDamL = $("#txtNhipDamL").val();
                 lstBeams[beamID].KhoangCacha = $("#txtKhoangCacha").val();
-    
+
                 lstBeams[beamID].BeTong = $("#cboBeTong option:selected").text();
                 lstBeams[beamID].Thep = $("#cboThep option:selected").text();
-    
+
                 lstBeams[beamID].MomentM = $("#txtMomentM").val();
                 lstBeams[beamID].MuyMin = $("#txtMuyMin").val();
             }
@@ -209,7 +209,7 @@ class EmployeeJS {
             this.loadData();
             this.hideDialogDetail();
         }
-        
+
     }
 
     btnOkOnClick() {
@@ -221,8 +221,12 @@ class EmployeeJS {
         var self = this;
         // Lấy mã nhân viên được chọn:
         var beamID = this.getEmployeeCodeSelected();
+        lstBeams.splice(beamID - 1, 1);
         if (beamID) {
-            lstBeams.splice(beamID - 1,1);
+            var i;
+            for (i = 0; i < lstBeams.length; i++) {
+                lstBeams[i].beamID = i + 1;
+            }
             this.loadData();
         } else {
             alert('Chưa có dầm nào được chọn');
@@ -362,7 +366,7 @@ class EmployeeJS {
         switch (typeBeTong) {
             case "B12.5 - M150": {
                 beTong.Rb = 750;
-                beTong.Rbt =  66;
+                beTong.Rbt = 66;
                 beTong.Eb = 2100000;
                 break;
             }
@@ -469,13 +473,13 @@ class EmployeeJS {
                 break;
             }
 
-            
+
         }
 
         return thep;
     }
 
-    infoHeSo(typeBeTong, typeThep){
+    infoHeSo(typeBeTong, typeThep) {
         var HeSo = {
             xiR: 1,
             alphaR: 1,
@@ -500,7 +504,7 @@ class EmployeeJS {
         HeSo.xiR = Math.round(xiR * 1000) / 1000;
         HeSo.alphaR = Math.round(alphaR * 1000) / 1000;
         HeSo.muyMax = Math.round(muyMax * 1000) / 1000;
-        
+
         return HeSo;
     }
 
@@ -604,55 +608,55 @@ var lstBeams = [
 ]
 
 //#region Các hàm Process
-function TinhThepHCN(h,a,b,Rb,M,alphaR,xiR,Rs,nguyMin,nguyMax) {
+function TinhThepHCN(h, a, b, Rb, M, alphaR, xiR, Rs, nguyMin, nguyMax) {
     var kq = 0;
-    var h0 = h-a;
-    var alphaM = Math.abs(M) / (Rb*b*h0*h0);
+    var h0 = h - a;
+    var alphaM = Math.abs(M) / (Rb * b * h0 * h0);
 
-    if (alphaM > alphaR){
+    if (alphaM > alphaR) {
         kq = 0;
     }
-    else{
-        var xi = 1 - Math.sqrt(1 - 2*alphaM);
+    else {
+        var xi = 1 - Math.sqrt(1 - 2 * alphaM);
         var _As = xi * Rb * b * h0 / Rs;
         // Tính hàm lượng cốt thép
-        var nguy = _As * 100 / (b*h0);
-        
-        if (nguyMin <= nguy && nguy < nguyMax){
+        var nguy = _As * 100 / (b * h0);
+
+        if (nguyMin <= nguy && nguy < nguyMax) {
             kq = _As;
-        } 
-        else{
+        }
+        else {
             kq = 0.05 * b * h0 / 100; // Tính theo giá trị nguy min
         }
     }
     return kq;
 }
-function TinhThepHCT(L,alphaR,b,h,M,hf,Rb,h0,XiR,Rs) {
+function TinhThepHCT(L, alphaR, b, h, M, hf, Rb, h0, XiR, Rs) {
     var kq = 0;
     // Tính Sf
     var sf = 6 * hf;
-    var sf2 = L/6;
-    sf = Math.min(sf,sf2);
+    var sf2 = L / 6;
+    sf = Math.min(sf, sf2);
     // Tính bf
     var bf = b + 2 * sf;
     // Tính Mf
     var Mf = Rb * bf * hf * (h0 - 0.5 * hf);
 
-    if (M < Mf){
+    if (M < Mf) {
         // Tính theo tiết diện chữ nhật do trục trung hòa đi qua bản cánh
-        kq = this.TinhThepHCN(h,h-h0,b,Rb,M,alphaR,XiR,Rs);
+        kq = this.TinhThepHCN(h, h - h0, b, Rb, M, alphaR, XiR, Rs);
     }
-    else{
+    else {
         // Trục trung hòa đi qua sườn tính theo chữ T
         var alphaM = (M - Rb * (bf - b) * hf * (h0 - 0.5 * hf)) / (Rb * b * h0 * h0);
-        if (alphaM < alphaR){
+        if (alphaM < alphaR) {
             var xi = 1 - Math.sqrt(1 - 2 * alphaM);
-            if (xi < XiR){
+            if (xi < XiR) {
                 var x = xi * h0;
                 kq = (Rb * b * x + Rb * (bf - b) * hf) / Rs;
             }
-            else{
-                kq = 0.05 * b *h0/100; // Tính theo giá trị muy min
+            else {
+                kq = 0.05 * b * h0 / 100; // Tính theo giá trị muy min
             }
         }
         // Chọn lại chiều cao H
