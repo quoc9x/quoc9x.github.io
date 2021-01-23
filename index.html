@@ -18,7 +18,7 @@
             <!--Example: inline
             <div class="iconbar" style="width:200px"></div>-->
             <div class="logo-text">
-                <span class="logo-textt">NUCE</span>
+                <span class="logo-textt">TTCK</span>
             </div>
         </div>
         <!--Menu-item-->
@@ -86,6 +86,7 @@
                                 <th>Bề dày sàn hf (m)</th>
                                 <th>Nhịp dầm L (m)</th>
                                 <th>Khoảng cách a (m)</th>
+                                <th>Hàm lượng CT μ min (%)</th>
                                 <th>Mô men M (daNm)</th>
                                 <th>Kết quả</th>
                             </tr>
@@ -176,17 +177,21 @@
                         <option value="5">CIV - AIV</option>
                         <option value="6">AV</option>
                         <option value="7">AVI</option>
-                        <option value="8">ATVII</option>
+                        <option value="8">AT - VII</option>
 
                     </select>
                 </div>
             </fieldset>
 
             <fieldset style="float: left;">
-                <legend>Nội lực:</legend>
+                <legend>Nội lực và hệ số:</legend>
                 <div class="row">
                     <label>Mô men (kNm)</label>
                     <input id="txtMomentM" required type="text" />
+                </div>
+                <div class="row">
+                    <label>Hàm lượng CT μ min (%):</label>
+                    <input id="txtMuyMin" required type="text" />
                 </div>
             </fieldset>
             <div style="float: right;">

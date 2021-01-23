@@ -4,6 +4,7 @@
     //employeeJS.loadData();
 })
 
+
 class EmployeeJS {
     constructor() {
         // Gán mặc định FormMode:
@@ -55,6 +56,7 @@ class EmployeeJS {
             <td>`+ items.BeDaySanhf + `</td>
             <td>`+ items.NhipDamL + `</td>
             <td>`+ items.KhoangCacha + `</td>
+            <td>`+ items.MuyMin + `</td>
             <td>`+ items.MomentM + `</td>
             <td>`+ items.KetQua + `</td>
                 </tr>`);
@@ -103,6 +105,7 @@ class EmployeeJS {
         $("#cboThep option:selected").val("CI - AI");
 
         $("#txtMomentM").val(150);
+        $("#txtMomentM").val(0.03);
         /////////////////////////////////////////////////////////////
     }
 
@@ -180,6 +183,9 @@ class EmployeeJS {
                 beam.Thep = $("#cboThep option:selected").text();
     
                 beam.MomentM = $("#txtMomentM").val();
+                beam.MuyMin = $("#txtMuyMin").val();
+                
+                beam.KetQua = "Chưa tính toán";
     
                 lstBeams.push(beam);
             }
@@ -197,6 +203,7 @@ class EmployeeJS {
                 lstBeams[beamID].Thep = $("#cboThep option:selected").text();
     
                 lstBeams[beamID].MomentM = $("#txtMomentM").val();
+                lstBeams[beamID].MuyMin = $("#txtMuyMin").val();
             }
             // Load lại dữ liệu:
             this.loadData();
@@ -311,157 +318,211 @@ class EmployeeJS {
     }
 
     cboBeTongMOnChange() {
-        var index = $("#cboBeTongM option:selected").val();
-        index = parseInt(index);
-        switch (index) {
-            case 0: {
-                $('#txtRb').val(750);
-                $('#txtRbt').val(66);
-                $('#txtEb').val(2100000);
-                break;
-            }
-            case 1: {
-                $('#txtRb').val(850);
-                $('#txtRbt').val(75);
-                $('#txtEb').val(2300000);
-                break;
-            }
-            case 2: {
-                $('#txtRb').val(1150);
-                $('#txtRbt').val(90);
-                $('#txtEb').val(2700000);
-                break;
-            }
-            case 3: {
-                $('#txtRb').val(1450);
-                $('#txtRbt').val(105);
-                $('#txtEb').val(3000000);
-                break;
-            }
-            case 4: {
-                $('#txtRb').val(1700);
-                $('#txtRbt').val(120);
-                $('#txtEb').val(3250000);
-                break;
-            }
-            case 5: {
-                $('#txtRb').val(1950);
-                $('#txtRbt').val(130);
-                $('#txtEb').val(3450000);
-                break;
-            }
-            case 6: {
-                $('#txtRb').val(2200);
-                $('#txtRbt').val(140);
-                $('#txtEb').val(3600000);
-                break;
-            }
-            case 7: {
-                $('#txtRb').val(2500);
-                $('#txtRbt').val(145);
-                $('#txtEb').val(3750000);
-                break;
-            }
-        }
+        var typeBeTongOnChange = $("#cboBeTongM option:selected").text();
+        var typeThepOnChange = $("#cboThepM option:selected").text();
+        var beTongOnChange = this.infoBeTong(typeBeTongOnChange);
 
-        var Rb = $('#txtRb').val();
-        var Rbt = $('#txtRbt').val();
-        var Eb = $('#txtEb').val();
+        var heSoOnChange = this.infoHeSo(typeBeTongOnChange, typeThepOnChange);
 
-        var Rs = $('#txtRs').val();
-        var Rsc = $('#txtRsc').val();
-        var Es = $('#txtEs').val();
+        $('#txtRb').val(beTongOnChange.Rb);
+        $('#txtRbt').val(beTongOnChange.Rbt);
+        $('#txtEb').val(beTongOnChange.Eb);
 
-        var xiR = (0.85 - 0.008 * (Rb / 100)) / (1 + (Rs / 40000) * (1 - (0.85 - 0.008 * (Rb / 100)) / 1.1));
-        var alphaR = xiR * (1-0.5*xiR);
-        var muyMax = xiR * Rb * 100 / Rs;
-
-        $('#txtxiR').val(Math.round(xiR * 1000) / 1000);
-        $('#txtalphaR').val(Math.round(alphaR * 1000) / 1000);
-        $('#txtmuyMax').val(Math.round(muyMax * 1000) / 1000);
+        $('#txtxiR').val(heSoOnChange.xiR);
+        $('#txtalphaR').val(heSoOnChange.alphaR);
+        $('#txtmuyMax').val(heSoOnChange.muyMax);
 
     }
 
 
     cboThepMOnChange() {
-        var index = $("#cboThepM option:selected").val();
-        index = parseInt(index);
-        switch (index) {
-            case 0: {
-                $('#txtRs').val(22500);
-                $('#txtRsc').val(22500);
-                $('#txtEs').val(21000000);
+        var typeBeTongOnChange = $("#cboBeTongM option:selected").text();
+        var typeThepOnChange = $("#cboThepM option:selected").text();
+
+        var thepOnChange = this.infoThep(typeThepOnChange);
+
+        var heSoOnChange = this.infoHeSo(typeBeTongOnChange, typeThepOnChange);
+
+        $('#txtRb').val(thepOnChange.Rs);
+        $('#txtRbt').val(thepOnChange.Rsc);
+        $('#txtEb').val(thepOnChange.Es);
+
+        $('#txtxiR').val(heSoOnChange.xiR);
+        $('#txtalphaR').val(heSoOnChange.alphaR);
+        $('#txtmuyMax').val(heSoOnChange.muyMax);
+    }
+
+    infoBeTong(typeBeTong) {
+        var beTong = {
+            Rb: 750,
+            Rbt: 66,
+            Eb: 2100000
+        }
+
+        switch (typeBeTong) {
+            case "B12.5 - M150": {
+                beTong.Rb = 750;
+                beTong.Rbt =  66;
+                beTong.Eb = 2100000;
                 break;
             }
-            case 1: {
-                $('#txtRs').val(28000);
-                $('#txtRsc').val(28000);
-                $('#txtEs').val(21000000);
+            case "B15 - M200": {
+                beTong.Rb = 850;
+                beTong.Rbt = 75;
+                beTong.Eb = 2300000;
                 break;
             }
-            case 2: {
-                $('#txtRs').val(33500);
-                $('#txtRsc').val(33500);
-                $('#txtEs').val(20000000);
+            case "B20 - M250": {
+                beTong.Rb = 1150;
+                beTong.Rbt = 90;
+                beTong.Eb = 2700000;
                 break;
             }
-            case 3: {
-                $('#txtRs').val(36500);
-                $('#txtRsc').val(36500);
-                $('#txtEs').val(20000000);
+            case "B25 - M350": {
+                beTong.Rb = 1450;
+                beTong.Rbt = 105;
+                beTong.Eb = 3000000;
                 break;
             }
-            case 4: {
-                $('#txtRs').val(51000);
-                $('#txtRsc').val(35000);
-                $('#txtEs').val(19000000);
+            case "B30 - M400": {
+                beTong.Rb = 1700;
+                beTong.Rbt = 120;
+                beTong.Eb = 3250000;
                 break;
             }
-            case 5: {
-                $('#txtRs').val(68000);
-                $('#txtRsc').val(50000);
-                $('#txtEs').val(19000000);
+            case "B35 - M450": {
+                beTong.Rb = 1950;
+                beTong.Rbt = 130;
+                beTong.Eb = 3450000;
                 break;
             }
-            case 6: {
-                $('#txtRs').val(81500);
-                $('#txtRsc').val(50000);
-                $('#txtEs').val(19000000);
+            case "B40 - M500": {
+                beTong.Rb = 2200;
+                beTong.Rbt = 140;
+                beTong.Eb = 3600000;
                 break;
             }
-            case 7: {
-                $('#txtRs').val(98000);
-                $('#txtRsc').val(50000);
-                $('#txtEs').val(19000000);
+            case "B45 - M600": {
+                beTong.Rb = 2500;
+                beTong.Rbt = 145;
+                beTong.Eb = 3750000;
+                break;
+            }
+        }
+
+        return beTong;
+    }
+
+    infoThep(typeThep) {
+        var thep = {
+            Rs: 22500,
+            Rsc: 22500,
+            Es: 21000000
+        }
+        switch (typeThep) {
+            case "CI - AI": {
+                thep.Rs = 22500;
+                thep.Rsc = 22500;
+                thep.Es = 21000000;
+                break;
+            }
+            case "CII - AII": {
+                thep.Rs = 28000;
+                thep.Rsc = 28000;
+                thep.Es = 21000000;
+                break;
+            }
+            case "CIII - AIII (6-8)": {
+                thep.Rs = 33500;
+                thep.Rsc = 33500;
+                thep.Es = 20000000;
+                break;
+            }
+            case "CIII - AIII (10-40)": {
+                thep.Rs = 36500;
+                thep.Rsc = 36500;
+                thep.Es = 20000000;
+                break;
+            }
+            case "CIV - AIV": {
+                thep.Rs = 51000;
+                thep.Rsc = 35000;
+                thep.Es = 19000000;
+                break;
+            }
+            case "AV": {
+                thep.Rs = 68000;
+                thep.Rsc = 50000;
+                thep.Es = 19000000;
+                break;
+            }
+            case "AVI": {
+                thep.Rs = 81500;
+                thep.Rsc = 50000;
+                thep.Es = 19000000;
+                break;
+            }
+            case "AT - VII": {
+                thep.Rs = 98000;
+                thep.Rsc = 50000;
+                thep.Es = 19000000;
                 break;
             }
 
             
         }
 
-        var Rb = $('#txtRb').val();
-        var Rbt = $('#txtRbt').val();
-        var Eb = $('#txtEb').val();
+        return thep;
+    }
 
-        var Rs = $('#txtRs').val();
-        var Rsc = $('#txtRsc').val();
-        var Es = $('#txtEs').val();
+    infoHeSo(typeBeTong, typeThep){
+        var HeSo = {
+            xiR: 1,
+            alphaR: 1,
+            muyMax: 1
+        }
+
+        var beTongOninfoHeSo = this.infoBeTong(typeBeTong);
+        var thepOninfoThep = this.infoThep(typeThep);
+
+        var Rb = beTongOninfoHeSo.Rb;
+        var Rbt = beTongOninfoHeSo.Rbt;
+        var Eb = beTongOninfoHeSo.Eb;
+
+        var Rs = thepOninfoThep.Rs;
+        var Rsc = thepOninfoThep.Rsc;
+        var Es = thepOninfoThep.Es;
 
         var xiR = (0.85 - 0.008 * (Rb / 100)) / (1 + (Rs / 40000) * (1 - (0.85 - 0.008 * (Rb / 100)) / 1.1));
         var alphaR = xiR * (1 - 0.5 * xiR);
         var muyMax = xiR * Rb * 100 / Rs;
 
-        $('#txtxiR').val(Math.round(xiR * 1000) / 1000);
-        $('#txtalphaR').val(Math.round(alphaR * 1000) / 1000);
-        $('#txtmuyMax').val(Math.round(muyMax * 1000) / 1000);
-
+        HeSo.xiR = Math.round(xiR * 1000) / 1000;
+        HeSo.alphaR = Math.round(alphaR * 1000) / 1000;
+        HeSo.muyMax = Math.round(muyMax * 1000) / 1000;
+        
+        return HeSo;
     }
 
     btnBeamProcessOnClick() {
-        beamProcess = new BeamProcess();
-        for (const beam of lstBeams){
-            beamProcess.TinhThepHCN
-            beam.KetQua = "Đã tính toán xong - Xem kết quả";
+        for (const beam of lstBeams) {
+            var beTongOnProcess = this.infoBeTong(beam.BeTong);
+            var thepOnProcess = this.infoThep(beam.Thep);
+            var heSoOnProcess = this.infoHeSo(beam.BeTong, beam.Thep);
+            var As = 0;
+            if (beam.MomentM > 0) {
+                As = TinhThepHCN(beam.ChieuCaoh, beam.KhoangCacha, beam.BeRongb, beTongOnProcess.Rb, beam.MomentM,
+                    heSoOnProcess.alphaR, heSoOnProcess.xiR, thepOnProcess.Rs);
+            }
+            else if (beam.MomentM < 0) {
+                var h0 = beam.ChieuCaoh - beam.KhoangCacha;
+                As = TinhThepHCT(beam.NhipDamL, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
+                    beam.MomentM, beam.BeDaySanhf, beTongOnProcess.Rb, h0,
+                    heSoOnProcess.xiR, thepOnChange.Rs);
+            }
+
+
+            beam.KetQua = "As = " + As + " (cm^2) - Click";
         }
         this.loadData();
     }
@@ -480,6 +541,7 @@ var lstBeams = [
         BeDaySanhf: 0.1,
         NhipDamL: 3,
         KhoangCacha: 0.03,
+        MuyMin: 0.03,
         MomentM: 125,
         KetQua: "Chưa tính toán"
     },
@@ -493,6 +555,7 @@ var lstBeams = [
         BeDaySanhf: 0.1,
         NhipDamL: 3,
         KhoangCacha: 0.03,
+        MuyMin: 0.03,
         MomentM: 125,
         KetQua: "Chưa tính toán"
     },
@@ -506,6 +569,7 @@ var lstBeams = [
         BeDaySanhf: 0.1,
         NhipDamL: 3,
         KhoangCacha: 0.03,
+        MuyMin: 0.03,
         MomentM: 125,
         KetQua: "Chưa tính toán"
     },
@@ -519,6 +583,7 @@ var lstBeams = [
         BeDaySanhf: 0.1,
         NhipDamL: 3,
         KhoangCacha: 0.03,
+        MuyMin: 0.03,
         MomentM: 125,
         KetQua: "Chưa tính toán"
     },
@@ -532,7 +597,67 @@ var lstBeams = [
         BeDaySanhf: 0.1,
         NhipDamL: 3,
         KhoangCacha: 0.03,
+        MuyMin: 0.03,
         MomentM: 125,
         KetQua: "Chưa tính toán"
     }
 ]
+
+//#region Các hàm Process
+function TinhThepHCN(h,a,b,Rb,M,alphaR,xiR,Rs,nguyMin,nguyMax) {
+    var kq = 0;
+    var h0 = h-a;
+    var alphaM = Math.abs(M) / (Rb*b*h0*h0);
+
+    if (alphaM > alphaR){
+        kq = 0;
+    }
+    else{
+        var xi = 1 - Math.sqrt(1 - 2*alphaM);
+        var _As = xi * Rb * b * h0 / Rs;
+        // Tính hàm lượng cốt thép
+        var nguy = _As * 100 / (b*h0);
+        
+        if (nguyMin <= nguy && nguy < nguyMax){
+            kq = _As;
+        } 
+        else{
+            kq = 0.05 * b * h0 / 100; // Tính theo giá trị nguy min
+        }
+    }
+    return kq;
+}
+function TinhThepHCT(L,alphaR,b,h,M,hf,Rb,h0,XiR,Rs) {
+    var kq = 0;
+    // Tính Sf
+    var sf = 6 * hf;
+    var sf2 = L/6;
+    sf = Math.min(sf,sf2);
+    // Tính bf
+    var bf = b + 2 * sf;
+    // Tính Mf
+    var Mf = Rb * bf * hf * (h0 - 0.5 * hf);
+
+    if (M < Mf){
+        // Tính theo tiết diện chữ nhật do trục trung hòa đi qua bản cánh
+        kq = this.TinhThepHCN(h,h-h0,b,Rb,M,alphaR,XiR,Rs);
+    }
+    else{
+        // Trục trung hòa đi qua sườn tính theo chữ T
+        var alphaM = (M - Rb * (bf - b) * hf * (h0 - 0.5 * hf)) / (Rb * b * h0 * h0);
+        if (alphaM < alphaR){
+            var xi = 1 - Math.sqrt(1 - 2 * alphaM);
+            if (xi < XiR){
+                var x = xi * h0;
+                kq = (Rb * b * x + Rb * (bf - b) * hf) / Rs;
+            }
+            else{
+                kq = 0.05 * b *h0/100; // Tính theo giá trị muy min
+            }
+        }
+        // Chọn lại chiều cao H
+        kq = 0;
+    }
+    return kq;
+}
+//#endregion
