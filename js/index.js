@@ -5,6 +5,8 @@
 })
 
 
+
+
 class EmployeeJS {
     constructor() {
         // Gán mặc định FormMode:
@@ -30,6 +32,9 @@ class EmployeeJS {
 
         $('#btnBeamProcess').click(this.btnBeamProcessOnClick.bind(this));
 
+        $('#btnImportExcel').on('click', function() {
+            $('#file-input').trigger('click');
+        });
 
         //$("#txtEmployeeCode").blur(this.checkRequired);
         //$("#txtEmployeeName").blur(this.checkRequired);
@@ -55,6 +60,7 @@ class EmployeeJS {
             <td>`+ items.BeRongb + `</td>
             <td>`+ items.BeDaySanhf + `</td>
             <td>`+ items.NhipDamL + `</td>
+            <td>`+ items.NhipGiuaHaiDaml + `</td>
             <td>`+ items.KhoangCacha + `</td>
             <td>`+ items.MuyMin + `</td>
             <td>`+ items.MomentM + `</td>
@@ -517,12 +523,16 @@ class EmployeeJS {
             if (beam.MomentM > 0) {
                 As = TinhThepHCN(beam.ChieuCaoh, beam.KhoangCacha, beam.BeRongb, beTongOnProcess.Rb, beam.MomentM,
                     heSoOnProcess.alphaR, heSoOnProcess.xiR, thepOnProcess.Rs);
+                As = As * 10000;
+                As = Math.round(As * 1000) / 3;
             }
             else if (beam.MomentM < 0) {
                 var h0 = beam.ChieuCaoh - beam.KhoangCacha;
                 As = TinhThepHCT(beam.NhipDamL, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
                     beam.MomentM, beam.BeDaySanhf, beTongOnProcess.Rb, h0,
                     heSoOnProcess.xiR, thepOnProcess.Rs);
+                As = As * 10000;
+                As = Math.round(As * 1000) / 3;
             }
 
 
@@ -544,6 +554,7 @@ var lstBeams = [
         BeRongb: 0.2,
         BeDaySanhf: 0.1,
         NhipDamL: 3,
+        NhipGiuaHaiDaml: 3,
         KhoangCacha: 0.03,
         MuyMin: 0.00003,
         MomentM: 15,
@@ -558,6 +569,7 @@ var lstBeams = [
         BeRongb: 0.2,
         BeDaySanhf: 0.1,
         NhipDamL: 3,
+        NhipGiuaHaiDaml: 3,
         KhoangCacha: 0.03,
         MuyMin: 0.00003,
         MomentM: 20,
@@ -572,6 +584,7 @@ var lstBeams = [
         BeRongb: 0.2,
         BeDaySanhf: 0.1,
         NhipDamL: 3,
+        NhipGiuaHaiDaml: 3,
         KhoangCacha: 0.03,
         MuyMin: 0.00003,
         MomentM: 25,
@@ -586,6 +599,7 @@ var lstBeams = [
         BeRongb: 0.2,
         BeDaySanhf: 0.1,
         NhipDamL: 3,
+        NhipGiuaHaiDaml: 3,
         KhoangCacha: 0.03,
         MuyMin: 0.00003,
         MomentM: 30,
@@ -600,6 +614,7 @@ var lstBeams = [
         BeRongb: 0.2,
         BeDaySanhf: 0.1,
         NhipDamL: 3,
+        NhipGiuaHaiDaml: 3,
         KhoangCacha: 0.03,
         MuyMin: 0.00003,
         MomentM: 35,

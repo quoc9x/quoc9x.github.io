@@ -65,6 +65,7 @@
                 <div class="toolbar">
                     <button style="width: 130px;" id="btnImportExcel"><i class="icon icon-importexcel"></i>Import từ
                         Excel</button>
+                    <input id="file-input" type="file" name="name" style="display: none;" accept=".xlsx, .xls"/>
                     <button id="btnAdd"><i class="icon icon-add"></i>Thêm</button>
                     <button id="btnEdit"><i class="icon icon-edit"></i>Sửa</button>
                     <button id="btnDelete"><i class="icon icon-delete"></i>Xóa</button>
@@ -85,9 +86,10 @@
                                 <th>Bề rộng b (m)</th>
                                 <th>Bề dày sàn hf (m)</th>
                                 <th>Nhịp dầm L (m)</th>
+                                <th>Khoảng cách nhịp giữa 2 dầm l (m)</th>
                                 <th>Khoảng cách a (m)</th>
                                 <th>Hàm lượng CT μ min (%)</th>
-                                <th>Mô men M (daNm)</th>
+                                <th>Mô men M (Tm)</th>
                                 <th>Kết quả</th>
                             </tr>
                         </thead>
@@ -186,7 +188,7 @@
             <fieldset style="float: left;">
                 <legend>Nội lực và hệ số:</legend>
                 <div class="row">
-                    <label>Mô men (kNm)</label>
+                    <label>Mô men (Tm)</label>
                     <input id="txtMomentM" required type="text" />
                 </div>
                 <div class="row">
@@ -314,6 +316,25 @@
         <div class="dialog-footer">
             <button id="btnOk">Ok</button>
         </div>
+    </div>
+
+    <div class="dialog-result">
+        <div class="dialog-title">
+            <div class="title-text">
+                Kết quả tính toán
+            </div>
+            <div class="title-close-bottomM">
+            </div>
+        </div>
+
+        <div class="dialog-body">
+
+        </div>
+
+        <div class="dialog-footer">
+            <button id="btnOk">Ok</button>
+        </div>
+
     </div>
 
     <script src="./js/jquery-3.5.1.min.js"></script>
