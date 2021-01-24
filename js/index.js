@@ -21,14 +21,22 @@ class EmployeeJS {
         $('#btnAdd').click(this.btnAddOnClick.bind(this));
         $('#btnInfoMat').click(this.btnInFoMatOnClick.bind(this));
         $('#btnSave').click(this.btnSaveOnClick.bind(this));
-        $('#btnOk').click(this.btnOkOnClick.bind(this));
+        $('#btnOkM').click(this.btnOkMOnClick.bind(this));
+
+        $('#btnOkR').click(this.btnOkROnClick.bind(this));
+
         $('#btnEdit').click(this.btnEditOnClick.bind(this));
         $('#btnCancel').click(this.btnCancelOnClick.bind(this));
         $('.title-close-bottom').click(this.btnCancelOnClick.bind(this));
         $('.title-close-bottomM').click(this.btnCancelOnClickM.bind(this));
+        $('.title-close-bottomR').click(this.btnCancelOnClickR.bind(this));
 
         $('#cboBeTongM').change(this.cboBeTongMOnChange.bind(this));
         $('#cboThepM').change(this.cboThepMOnChange.bind(this));
+
+        $('#cboSoThanh').change(this.cboSoThanhOnChange.bind(this));
+        $('#cboDuongKinh').change(this.cboDuongKinhOnChange.bind(this));
+
 
         $('#btnBeamProcess').click(this.btnBeamProcessOnClick.bind(this));
 
@@ -44,6 +52,8 @@ class EmployeeJS {
         $('#btnDelete').click(this.btnDeleteOnClick.bind(this));
         $("input[required]").blur(this.checkRequired);
         $("table tbody").on("click", "tr", this.rowOnSelect);
+
+        $("table tbody").dblclick(this.trowOnDoubleClick.bind(this));
     }
 
 
@@ -64,6 +74,7 @@ class EmployeeJS {
             <td>`+ items.KhoangCacha + `</td>
             <td>`+ items.MuyMin + `</td>
             <td>`+ items.MomentM + `</td>
+            <td>`+ items.Q + `</td>
             <td>`+ items.KetQua + `</td>
                 </tr>`);
             $('.gridbar tbody').append(trHTML);
@@ -104,13 +115,15 @@ class EmployeeJS {
         $("#txtChieuCaoh").val(0.6);
         $("#txtBeRongb").val(0.2);
         $("#txtBeDaySanhf").val(0.1);
-        $("#txtNhipDamL").val(3);
+        $("#txtNhipDamL").val(6);
+        $("#txtKCGiua2NhipDam").val(3);
         $("#txtKhoangCacha").val(0.03);
 
         $("#cboBeTong option:selected").val("B12.5 - M150");
         $("#cboThep option:selected").val("CI - AI");
 
         $("#txtMomentM").val(150);
+        $("#txtLucCatQ").val(100);
         $("#txtMuyMin").val(0.00003);
         /////////////////////////////////////////////////////////////
     }
@@ -122,13 +135,11 @@ class EmployeeJS {
 
     }
 
-
-
     btnEditOnClick() {
         var self = this;
         this.FormMode = "edit";
         // Lấy mã nhân viên được chọn:
-        var beamID = this.getEmployeeCodeSelected();
+        var beamID = this.getBeamIDSelected();
         if (beamID != null) {
             beamID--;
             // Hiển thị form chi tiết:
@@ -140,12 +151,16 @@ class EmployeeJS {
             $("#txtBeRongb").val(beam.BeRongb);
             $("#txtBeDaySanhf").val(beam.BeDaySanhf);
             $("#txtNhipDamL").val(beam.NhipDamL);
+            $("#txtKCGiua2NhipDam").val(beam.NhipGiuaHaiDaml);
             $("#txtKhoangCacha").val(beam.KhoangCacha);
 
             $("#cboBeTong option:selected").val(beam.BeTong);
             $("#cboThep option:selected").val(beam.Thep);
 
             $("#txtMomentM").val(beam.MomentM);
+            $("#txtLucCatQ").val(beam.Q);
+
+            $("#txtMuyMin").val(beam.MuyMin);
 
         }
         else {
@@ -165,7 +180,6 @@ class EmployeeJS {
         var inputRequireds = $("[required]");
         var isValid = true;
         $.each(inputRequireds, function (index, input) {
-            debugger;
             var valid = $(input).trigger("blur");
             if (isValid && valid.hasClass("required-error")) {
                 isValid = false;
@@ -183,12 +197,14 @@ class EmployeeJS {
                 beam.BeRongb = $("#txtBeRongb").val();
                 beam.BeDaySanhf = $("#txtBeDaySanhf").val();
                 beam.NhipDamL = $("#txtNhipDamL").val();
+                beam.NhipGiuaHaiDaml = $("#txtKCGiua2NhipDam").val();
                 beam.KhoangCacha = $("#txtKhoangCacha").val();
 
                 beam.BeTong = $("#cboBeTong option:selected").text();
                 beam.Thep = $("#cboThep option:selected").text();
 
                 beam.MomentM = $("#txtMomentM").val();
+                beam.Q = $("#txtLucCatQ").val();
                 beam.MuyMin = $("#txtMuyMin").val();
 
                 beam.KetQua = "Chưa tính toán";
@@ -196,19 +212,21 @@ class EmployeeJS {
                 lstBeams.push(beam);
             }
             else if (this.FormMode === "edit") {
-                var beamID = this.getEmployeeCodeSelected();
+                var beamID = this.getBeamIDSelected();
                 beamID--;
                 lstBeams[beamID].Ten = $("#txtTenDam").val();
                 lstBeams[beamID].ChieuCaoh = $("#txtChieuCaoh").val();
                 lstBeams[beamID].BeRongb = $("#txtBeRongb").val();
                 lstBeams[beamID].BeDaySanhf = $("#txtBeDaySanhf").val();
                 lstBeams[beamID].NhipDamL = $("#txtNhipDamL").val();
+                lstBeams[beamID].NhipGiuaHaiDaml = $("#txtKCGiua2NhipDam").val();
                 lstBeams[beamID].KhoangCacha = $("#txtKhoangCacha").val();
 
                 lstBeams[beamID].BeTong = $("#cboBeTong option:selected").text();
                 lstBeams[beamID].Thep = $("#cboThep option:selected").text();
 
                 lstBeams[beamID].MomentM = $("#txtMomentM").val();
+                lstBeams[beamID].Q = $("#txtLucCatQ").val();
                 lstBeams[beamID].MuyMin = $("#txtMuyMin").val();
             }
             // Load lại dữ liệu:
@@ -218,15 +236,18 @@ class EmployeeJS {
 
     }
 
-    btnOkOnClick() {
+    btnOkMOnClick() {
         this.hideDialogDetailM();
     }
 
+    btnOkROnClick() {
+        this.hideDialogDetailR();
+    }
 
     btnDeleteOnClick() {
         var self = this;
         // Lấy mã nhân viên được chọn:
-        var beamID = this.getEmployeeCodeSelected();
+        var beamID = this.getBeamIDSelected();
         lstBeams.splice(beamID - 1, 1);
         if (beamID) {
             var i;
@@ -241,9 +262,9 @@ class EmployeeJS {
     }
 
     /**
-     * Lấy mã nhân viên được chọn trong danh sách
+     * Lấy mã dầm được chọn trong danh sách
      * */
-    getEmployeeCodeSelected() {
+    getBeamIDSelected() {
         // 1. Xác định nhân viên nào được chọn:
         var beamID = null;
         var trSelected = $("#tbBeamList tr.row-selected");
@@ -251,6 +272,19 @@ class EmployeeJS {
             beamID = $(trSelected).children()[0].textContent;
         }
         return beamID;
+    }
+
+    /**
+     * Lấy trạng thái dầm được chọn trong danh sách
+     * */
+    getBeamStatusSelected() {
+        // 1. Xác định nhân viên nào được chọn:
+        var beamStatus = null;
+        var trSelected = $("#tbBeamList tr.row-selected");
+        if (trSelected.length > 0) {
+            beamStatus = $(trSelected).children()[12].textContent;
+        }
+        return beamStatus;
     }
 
 
@@ -293,6 +327,10 @@ class EmployeeJS {
 
         this.hideDialogDetailM();
     }
+
+    btnCancelOnClickR() {
+        this.hideDialogDetailR();
+    }
     /*
      * Hiển thị dialog chi tiết 
      * Author: quocnvc
@@ -310,7 +348,15 @@ class EmployeeJS {
         $('.dialog input').val(null);
         $('.dialog-modal').show();
         $('.dialog-material').show();
-        $("#txtTenDam").focus();
+        // $("#txtTenDam").focus();
+    }
+
+    showDialogDetailR() {
+        // Clean tất cả các giá trị cũ trên các input trong form:
+        $('.dialog input').val(null);
+        $('.dialog-modal').show();
+        $('.dialog-result').show();
+        // $("#txtTenDam").focus();
     }
 
     /*
@@ -325,6 +371,11 @@ class EmployeeJS {
     hideDialogDetailM() {
         $('.dialog-modal').hide();
         $('.dialog-material').hide();
+    }
+
+    hideDialogDetailR() {
+        $('.dialog-modal').hide();
+        $('.dialog-result').hide();
     }
 
     cboBeTongMOnChange() {
@@ -360,6 +411,14 @@ class EmployeeJS {
         $('#txtxiR').val(heSoOnChange.xiR);
         $('#txtalphaR').val(heSoOnChange.alphaR);
         $('#txtmuyMax').val(heSoOnChange.muyMax);
+    }
+
+    cboSoThanhOnChange() {
+        this.KiemTraKetQua();
+    }
+
+    cboDuongKinhOnChange() {
+        this.KiemTraKetQua();
     }
 
     infoBeTong(typeBeTong) {
@@ -514,30 +573,102 @@ class EmployeeJS {
         return HeSo;
     }
 
+    TinhDienTichThep(soThanh, duongKinh) {
+        var r = duongKinh / 2;
+        var res = soThanh * 3.14 * r * r;
+        return res;
+    }
+
+    KiemTraKetQua() {
+        var soThanhOnChange = $("#cboSoThanh option:selected").text();
+        var duongKinhOnChange = $("#cboDuongKinh option:selected").text();
+        var beamID = this.getBeamIDSelected();
+        beamID--;
+        var dienTich = this.TinhDienTichThep(soThanhOnChange, duongKinhOnChange);
+        dienTich = dienTich / 100;
+        dienTich = Math.round(dienTich * 1000) / 1000;
+        $('#txtDienTich').val(dienTich);
+        var isThep = dienTich >= lstBeams[beamID].As;
+        if (isThep){
+            $('#spanStatus').text("Thỏa mãn");
+            $('#spanDetails').text("(cốt thép yêu cầu " + lstBeams[beamID].As
+            + " cm^2)");
+        }
+        else{
+            $('#spanStatus').text("Không thỏa mãn");
+            $('#spanDetails').text("(nhỏ hơn cốt thép yêu cầu " + lstBeams[beamID].As
+            + " cm^2)");
+        }
+    }
+
+    trowOnDoubleClick() {
+        var beamStatus = this.getBeamStatusSelected();
+        var beamID = this.getBeamIDSelected();
+        var isStatus = (beamStatus != "Chưa tính toán") && (beamStatus != null);
+        if (isStatus){
+            this.showDialogDetailR();
+            $("#cboSoThanh option:selected").text(3);
+            $("#cboDuongKinh option:selected").text(28);
+            $("#cboSoNhanh option:selected").text(2);
+            $("#cboDKCotDai option:selected").text(8);
+            this.KiemTraKetQua();
+        }
+        
+    }
+
     btnBeamProcessOnClick() {
-        for (const beam of lstBeams) {
+        var beamID = this.getBeamIDSelected();
+        var nguyMaxOnProcess = $("#txtmuyMax").val();
+        if (beamID === null){
+            for (const beam of lstBeams) {
+                var beTongOnProcess = this.infoBeTong(beam.BeTong);
+                var thepOnProcess = this.infoThep(beam.Thep);
+                var heSoOnProcess = this.infoHeSo(beam.BeTong, beam.Thep);
+                var As = 0;
+                if (beam.MomentM < 0) {
+                    As = TinhThepHCN(beam.ChieuCaoh, beam.KhoangCacha, beam.BeRongb, beTongOnProcess.Rb, beam.MomentM,
+                        heSoOnProcess.alphaR, heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, nguyMaxOnProcess);
+                    As = As * 10000;
+                    As = Math.round(As * 1000) / 1000;
+                }
+                else if (beam.MomentM > 0) {
+                    var h0 = beam.ChieuCaoh - beam.KhoangCacha;
+                    As = TinhThepHCT(beam.NhipGiuaHaiDaml, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
+                        beam.MomentM, beam.BeDaySanhf, beTongOnProcess.Rb, h0,
+                        heSoOnProcess.xiR, thepOnProcess.Rs,beam.MuyMin, nguyMaxOnProcess);
+                    As = As * 10000;
+                    As = Math.round(As * 1000) / 1000;
+                }
+    
+                beam.As = As;
+                beam.KetQua = "As = " + As + " (cm^2) - Double click xem chi tiết";
+            }
+        }
+        else {
+            var beam = lstBeams[beamID - 1];
             var beTongOnProcess = this.infoBeTong(beam.BeTong);
             var thepOnProcess = this.infoThep(beam.Thep);
             var heSoOnProcess = this.infoHeSo(beam.BeTong, beam.Thep);
             var As = 0;
             if (beam.MomentM > 0) {
                 As = TinhThepHCN(beam.ChieuCaoh, beam.KhoangCacha, beam.BeRongb, beTongOnProcess.Rb, beam.MomentM,
-                    heSoOnProcess.alphaR, heSoOnProcess.xiR, thepOnProcess.Rs);
+                    heSoOnProcess.alphaR, heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, muyMax);
                 As = As * 10000;
-                As = Math.round(As * 1000) / 3;
+                As = Math.round(As * 1000) / 1000;
             }
             else if (beam.MomentM < 0) {
                 var h0 = beam.ChieuCaoh - beam.KhoangCacha;
                 As = TinhThepHCT(beam.NhipDamL, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
                     beam.MomentM, beam.BeDaySanhf, beTongOnProcess.Rb, h0,
-                    heSoOnProcess.xiR, thepOnProcess.Rs);
+                    heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, muyMax);
                 As = As * 10000;
-                As = Math.round(As * 1000) / 3;
+                As = Math.round(As * 1000) / 1000;
             }
 
-
-            beam.KetQua = "As = " + As + " (cm^2) - Click xem chi tiết";
+            beam.As = As;
+            beam.KetQua = "As = " + As + " (cm^2) - Double click xem chi tiết";
         }
+        
         this.loadData();
     }
 
@@ -549,46 +680,52 @@ var lstBeams = [
         beamID: 1,
         Ten: "Dầm D1",
         BeTong: "B30 - M400",
-        Thep: "CIII",
+        Thep: "CIII - AIII (10-40)",
         ChieuCaoh: 0.6,
-        BeRongb: 0.2,
+        BeRongb: 0.22,
         BeDaySanhf: 0.1,
-        NhipDamL: 3,
+        NhipDamL: 6,
         NhipGiuaHaiDaml: 3,
         KhoangCacha: 0.03,
         MuyMin: 0.00003,
-        MomentM: 15,
-        KetQua: "Chưa tính toán"
+        MomentM: -11.27,
+        Q: 17.15,
+        KetQua: "Chưa tính toán",
+        As: 0
     },
     {
         beamID: 2,
         Ten: "Dầm D2",
         BeTong: "B30 - M400",
-        Thep: "CII",
+        Thep: "CIII - AIII (10-40)",
         ChieuCaoh: 0.6,
-        BeRongb: 0.2,
+        BeRongb: 0.22,
         BeDaySanhf: 0.1,
-        NhipDamL: 3,
+        NhipDamL: 6,
         NhipGiuaHaiDaml: 3,
         KhoangCacha: 0.03,
         MuyMin: 0.00003,
-        MomentM: 20,
-        KetQua: "Chưa tính toán"
+        MomentM: 11.28,
+        Q: 17.15,
+        KetQua: "Chưa tính toán",
+        As: 0
     },
     {
         beamID: 3,
         Ten: "Dầm D3",
         BeTong: "B30 - M400",
-        Thep: "CII",
+        Thep: "CIII - AIII (10-40)",
         ChieuCaoh: 0.6,
-        BeRongb: 0.2,
+        BeRongb: 0.22,
         BeDaySanhf: 0.1,
-        NhipDamL: 3,
+        NhipDamL: 6,
         NhipGiuaHaiDaml: 3,
         KhoangCacha: 0.03,
         MuyMin: 0.00003,
-        MomentM: 25,
-        KetQua: "Chưa tính toán"
+        MomentM: -18.15,
+        Q: 17.15,
+        KetQua: "Chưa tính toán",
+        As: 0
     },
     {
         beamID: 4,
@@ -598,27 +735,31 @@ var lstBeams = [
         ChieuCaoh: 0.6,
         BeRongb: 0.2,
         BeDaySanhf: 0.1,
-        NhipDamL: 3,
+        NhipDamL: 6,
         NhipGiuaHaiDaml: 3,
         KhoangCacha: 0.03,
         MuyMin: 0.00003,
         MomentM: 30,
-        KetQua: "Chưa tính toán"
+        Q: 100,
+        KetQua: "Chưa tính toán",
+        As: 0
     },
     {
         beamID: 5,
         Ten: "Dầm D5",
         BeTong: "B30 - M400",
-        Thep: "CII",
+        Thep: "CIII - AIII (10-40)",
         ChieuCaoh: 0.6,
         BeRongb: 0.2,
         BeDaySanhf: 0.1,
-        NhipDamL: 3,
+        NhipDamL: 6,
         NhipGiuaHaiDaml: 3,
         KhoangCacha: 0.03,
         MuyMin: 0.00003,
         MomentM: 35,
-        KetQua: "Chưa tính toán"
+        Q: 100,
+        KetQua: "Chưa tính toán",
+        As: 0
     }
 ]
 
@@ -636,7 +777,7 @@ function TinhThepHCN(h, a, b, Rb, M, alphaR, xiR, Rs, nguyMin, nguyMax) {
         var _As = xi * Rb * b * h0 / Rs;
         // Tính hàm lượng cốt thép
         var nguy = _As * 100 / (b * h0);
-
+        
         if (nguyMin <= nguy && nguy < nguyMax) {
             kq = _As;
         }
@@ -646,7 +787,7 @@ function TinhThepHCN(h, a, b, Rb, M, alphaR, xiR, Rs, nguyMin, nguyMax) {
     }
     return kq;
 }
-function TinhThepHCT(L, alphaR, b, h, M, hf, Rb, h0, XiR, Rs) {
+function TinhThepHCT(L, alphaR, b, h, M, hf, Rb, h0, XiR, Rs, nguyMin, nguyMax) {
     var kq = 0;
     // Tính Sf
     var sf = 6 * hf;
@@ -659,7 +800,7 @@ function TinhThepHCT(L, alphaR, b, h, M, hf, Rb, h0, XiR, Rs) {
 
     if (M < Mf) {
         // Tính theo tiết diện chữ nhật do trục trung hòa đi qua bản cánh
-        kq = this.TinhThepHCN(h, h - h0, b, Rb, M, alphaR, XiR, Rs);
+        kq = this.TinhThepHCN(h, h - h0, b, Rb, M, alphaR, XiR, Rs, nguyMin, nguyMax);
     }
     else {
         // Trục trung hòa đi qua sườn tính theo chữ T
