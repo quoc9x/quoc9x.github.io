@@ -618,7 +618,6 @@ class EmployeeJS {
 
     btnBeamProcessOnClick() {
         var beamID = this.getBeamIDSelected();
-        var nguyMaxOnProcess = $("#txtmuyMax").val();
         if (beamID === null){
             for (const beam of lstBeams) {
                 var beTongOnProcess = this.infoBeTong(beam.BeTong);
@@ -627,7 +626,7 @@ class EmployeeJS {
                 var As = 0;
                 if (beam.MomentM < 0) {
                     As = TinhThepHCN(beam.ChieuCaoh, beam.KhoangCacha, beam.BeRongb, beTongOnProcess.Rb, beam.MomentM,
-                        heSoOnProcess.alphaR, heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, nguyMaxOnProcess);
+                        heSoOnProcess.alphaR, heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, heSoOnProcess.muyMax);
                     As = As * 10000;
                     As = Math.round(As * 1000) / 1000;
                 }
@@ -635,7 +634,7 @@ class EmployeeJS {
                     var h0 = beam.ChieuCaoh - beam.KhoangCacha;
                     As = TinhThepHCT(beam.NhipGiuaHaiDaml, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
                         beam.MomentM, beam.BeDaySanhf, beTongOnProcess.Rb, h0,
-                        heSoOnProcess.xiR, thepOnProcess.Rs,beam.MuyMin, nguyMaxOnProcess);
+                        heSoOnProcess.xiR, thepOnProcess.Rs,beam.MuyMin, heSoOnProcess.muyMax);
                     As = As * 10000;
                     As = Math.round(As * 1000) / 1000;
                 }
@@ -652,7 +651,7 @@ class EmployeeJS {
             var As = 0;
             if (beam.MomentM > 0) {
                 As = TinhThepHCN(beam.ChieuCaoh, beam.KhoangCacha, beam.BeRongb, beTongOnProcess.Rb, beam.MomentM,
-                    heSoOnProcess.alphaR, heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, muyMax);
+                    heSoOnProcess.alphaR, heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, heSoOnProcess.muyMax);
                 As = As * 10000;
                 As = Math.round(As * 1000) / 1000;
             }
@@ -660,7 +659,7 @@ class EmployeeJS {
                 var h0 = beam.ChieuCaoh - beam.KhoangCacha;
                 As = TinhThepHCT(beam.NhipDamL, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
                     beam.MomentM, beam.BeDaySanhf, beTongOnProcess.Rb, h0,
-                    heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, muyMax);
+                    heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, heSoOnProcess.muyMax);
                 As = As * 10000;
                 As = Math.round(As * 1000) / 1000;
             }
