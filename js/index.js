@@ -154,8 +154,8 @@ class EmployeeJS {
             $("#txtKCGiua2NhipDam").val(beam.NhipGiuaHaiDaml);
             $("#txtKhoangCacha").val(beam.KhoangCacha);
 
-            $("#cboBeTong option:selected").val(beam.BeTong);
-            $("#cboThep option:selected").val(beam.Thep);
+            $("#cboBeTong").val(beam.indexBeTong).change(); 
+            $("#cboThep").val(beam.indexThep).change();
 
             $("#txtMomentM").val(beam.MomentM);
             $("#txtLucCatQ").val(beam.Q);
@@ -202,6 +202,8 @@ class EmployeeJS {
 
                 beam.BeTong = $("#cboBeTong option:selected").text();
                 beam.Thep = $("#cboThep option:selected").text();
+                beam.indexBeTong = $("#cboBeTong option:selected").val();
+                beam.indexThep = $("#cboThep option:selected").val();
 
                 beam.MomentM = $("#txtMomentM").val();
                 beam.Q = $("#txtLucCatQ").val();
@@ -224,6 +226,8 @@ class EmployeeJS {
 
                 lstBeams[beamID].BeTong = $("#cboBeTong option:selected").text();
                 lstBeams[beamID].Thep = $("#cboThep option:selected").text();
+                lstBeams[beamID].indexBeTong = $("#cboBeTong option:selected").val();
+                lstBeams[beamID].indexThep = $("#cboThep option:selected").val();
 
                 lstBeams[beamID].MomentM = $("#txtMomentM").val();
                 lstBeams[beamID].Q = $("#txtLucCatQ").val();
@@ -607,10 +611,10 @@ class EmployeeJS {
         var isStatus = (beamStatus != "Chưa tính toán") && (beamStatus != null);
         if (isStatus){
             this.showDialogDetailR();
-            $("#cboSoThanh option:selected").val(1);
-            $("#cboDuongKinh option:selected").val(1);
-            $("#cboSoNhanh option:selected").val(1);
-            $("#cboDKCotDai option:selected").val(1);
+            $("#cboSoThanh").val(1).change();
+            $("#cboDuongKinh").val(9).change();
+            $("#cboSoNhanh").val(1).change();
+            $("#cboDKCotDai").val(1).change();
             this.KiemTraKetQua();
         }
         
@@ -680,6 +684,8 @@ var lstBeams = [
         Ten: "Dầm D1",
         BeTong: "B30 - M400",
         Thep: "CIII - AIII (10-40)",
+        indexBeTong: 5,
+        indexThep: 4,
         ChieuCaoh: 0.6,
         BeRongb: 0.22,
         BeDaySanhf: 0.1,
@@ -697,6 +703,8 @@ var lstBeams = [
         Ten: "Dầm D2",
         BeTong: "B30 - M400",
         Thep: "CIII - AIII (10-40)",
+        indexBeTong: 5,
+        indexThep: 4,
         ChieuCaoh: 0.6,
         BeRongb: 0.22,
         BeDaySanhf: 0.1,
@@ -714,6 +722,8 @@ var lstBeams = [
         Ten: "Dầm D3",
         BeTong: "B30 - M400",
         Thep: "CIII - AIII (10-40)",
+        indexBeTong: 5,
+        indexThep: 4,
         ChieuCaoh: 0.6,
         BeRongb: 0.22,
         BeDaySanhf: 0.1,
@@ -731,6 +741,8 @@ var lstBeams = [
         Ten: "Dầm D4",
         BeTong: "B30 - M400",
         Thep: "CIII - AIII (10-40)",
+        indexBeTong: 5,
+        indexThep: 4,
         ChieuCaoh: 0.6,
         BeRongb: 0.2,
         BeDaySanhf: 0.1,
@@ -748,6 +760,8 @@ var lstBeams = [
         Ten: "Dầm D5",
         BeTong: "B30 - M400",
         Thep: "CIII - AIII (10-40)",
+        indexBeTong: 5,
+        indexThep: 4,
         ChieuCaoh: 0.6,
         BeRongb: 0.2,
         BeDaySanhf: 0.1,
