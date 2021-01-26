@@ -286,7 +286,7 @@ class EmployeeJS {
         var beamStatus = null;
         var trSelected = $("#tbBeamList tr.row-selected");
         if (trSelected.length > 0) {
-            beamStatus = $(trSelected).children()[12].textContent;
+            beamStatus = $(trSelected).children()[13].textContent;
         }
         return beamStatus;
     }
