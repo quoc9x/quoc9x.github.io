@@ -123,7 +123,7 @@ class EmployeeJS {
         $("#cboThep").val(3).change();
 
         $("#txtMomentM").val(150);
-        $("#txtLucCatQ").val(100);
+        $("#txtLucCatQ").val(18);
         $("#txtMuyMin").val(0.00003);
         /////////////////////////////////////////////////////////////
     }
