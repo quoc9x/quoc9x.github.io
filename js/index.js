@@ -119,8 +119,8 @@ class EmployeeJS {
         $("#txtKCGiua2NhipDam").val(3);
         $("#txtKhoangCacha").val(0.03);
 
-        $("#cboBeTong option:selected").val("B12.5 - M150");
-        $("#cboThep option:selected").val("CI - AI");
+        $("#cboBeTong").val(3).change();
+        $("#cboThep").val(3).change();
 
         $("#txtMomentM").val(150);
         $("#txtLucCatQ").val(100);
