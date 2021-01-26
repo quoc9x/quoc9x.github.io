@@ -119,7 +119,7 @@ class EmployeeJS {
         $("#txtKCGiua2NhipDam").val(3);
         $("#txtKhoangCacha").val(0.03);
 
-        $("#cboBeTong").val(3).change();
+        $("#cboBeTong").val(6).change();
         $("#cboThep").val(3).change();
 
         $("#txtMomentM").val(18);
