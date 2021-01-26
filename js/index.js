@@ -122,8 +122,8 @@ class EmployeeJS {
         $("#cboBeTong").val(3).change();
         $("#cboThep").val(3).change();
 
-        $("#txtMomentM").val(150);
-        $("#txtLucCatQ").val(18);
+        $("#txtMomentM").val(18);
+        $("#txtLucCatQ").val(100);
         $("#txtMuyMin").val(0.00003);
         /////////////////////////////////////////////////////////////
     }
