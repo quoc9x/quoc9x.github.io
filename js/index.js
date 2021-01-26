@@ -607,10 +607,10 @@ class EmployeeJS {
         var isStatus = (beamStatus != "Chưa tính toán") && (beamStatus != null);
         if (isStatus){
             this.showDialogDetailR();
-            $("#cboSoThanh option:selected").text(3);
-            $("#cboDuongKinh option:selected").text(28);
-            $("#cboSoNhanh option:selected").text(2);
-            $("#cboDKCotDai option:selected").text(8);
+            $("#cboSoThanh option:selected").val(1);
+            $("#cboDuongKinh option:selected").val(1);
+            $("#cboSoNhanh option:selected").val(1);
+            $("#cboDKCotDai option:selected").val(1);
             this.KiemTraKetQua();
         }
         
