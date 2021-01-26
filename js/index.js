@@ -408,9 +408,9 @@ class EmployeeJS {
 
         var heSoOnChange = this.infoHeSo(typeBeTongOnChange, typeThepOnChange);
 
-        $('#txtRb').val(thepOnChange.Rs);
-        $('#txtRbt').val(thepOnChange.Rsc);
-        $('#txtEb').val(thepOnChange.Es);
+        $('#txtRs').val(thepOnChange.Rs);
+        $('#txtRsc').val(thepOnChange.Rsc);
+        $('#txtEs').val(thepOnChange.Es);
 
         $('#txtxiR').val(heSoOnChange.xiR);
         $('#txtalphaR').val(heSoOnChange.alphaR);
