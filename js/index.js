@@ -126,7 +126,7 @@ class EmployeeJS {
 
         $("#txtMomentM").val(18);
         $("#txtLucCatQ").val(100);
-        $("#txtMuyMin").val(0.00003);
+        $("#txtMuyMin").val(0.05);
         /////////////////////////////////////////////////////////////
     }
 
@@ -733,7 +733,7 @@ var lstBeams = [
         NhipDamL: 6,
         NhipGiuaHaiDaml: 3,
         KhoangCacha: 0.03,
-        MuyMin: 0.00003,
+        MuyMin: 0.05,
         MomentM: -11.27,
         Q: 17.15,
         KetQua: "Chưa tính toán",
@@ -752,7 +752,7 @@ var lstBeams = [
         NhipDamL: 6,
         NhipGiuaHaiDaml: 3,
         KhoangCacha: 0.03,
-        MuyMin: 0.00003,
+        MuyMin: 0.05,
         MomentM: 11.28,
         Q: 17.15,
         KetQua: "Chưa tính toán",
@@ -771,7 +771,7 @@ var lstBeams = [
         NhipDamL: 6,
         NhipGiuaHaiDaml: 3,
         KhoangCacha: 0.03,
-        MuyMin: 0.00003,
+        MuyMin: 0.05,
         MomentM: -18.15,
         Q: 17.15,
         KetQua: "Chưa tính toán",
@@ -790,7 +790,7 @@ var lstBeams = [
         NhipDamL: 6,
         NhipGiuaHaiDaml: 3,
         KhoangCacha: 0.03,
-        MuyMin: 0.00003,
+        MuyMin: 0.05,
         MomentM: 30,
         Q: 100,
         KetQua: "Chưa tính toán",
@@ -809,7 +809,7 @@ var lstBeams = [
         NhipDamL: 6,
         NhipGiuaHaiDaml: 3,
         KhoangCacha: 0.03,
-        MuyMin: 0.00003,
+        MuyMin: 0.05,
         MomentM: 35,
         Q: 100,
         KetQua: "Chưa tính toán",
