@@ -336,7 +336,7 @@
         </div>
 
         <div class="dialog-body">
-            <fieldset style="float: left; height: 230px;">
+            <fieldset style="float: left; height: 240px;">
                 <legend>Chọn cốt thép:</legend>
                 <div class="res-thep-text">
                     <div class="row">
@@ -375,19 +375,19 @@
 
                     <div class="row">
                         <label>Diện tích (cm^2):</label>
-                        <input id="txtDienTich" type="text" />
+                        <input id="txtDienTich" type="text" style="color:blue" readonly="readonly" />
                     </div>
                     <div class="row">
                         <span id="spanStatus" class="span-res"></span>
                     </div>
                     <div class="row">
-                        <span id="spanDetails" class="span-res"></span>
+                        <span id="spanDetailsThep" class="span-res"></span>
                     </div>
                 </div>
 
             </fieldset> 
             
-            <fieldset style="float: left; height: 230px;">
+            <fieldset style="float: left; height: 240px;">
                 <legend>Chọn cốt đai:</legend>
                 <div class="row">
                     <label>Số nhánh: </label>
@@ -406,7 +406,14 @@
                     </select>
                 </div>
                 <div class="row">
-                    <span id="spanDetails" class="span-res">Thỏa mãn</span>
+                    <label>Khoảng cách cốt đai (mm):</label>
+                    <input id="txtKCCotDai" type="text" />
+                </div>
+                <div class="row">
+                    <button id="btnKiemTraCotDai">Kiểm Tra</button>
+                </div>
+                <div class="row">
+                    <span id="spanDetailsCotDai" class="span-res">Chưa tính cốt đai</span>
                 </div>
             </fieldset>      
             

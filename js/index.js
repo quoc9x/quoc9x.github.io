@@ -37,6 +37,8 @@ class EmployeeJS {
         $('#cboSoThanh').change(this.cboSoThanhOnChange.bind(this));
         $('#cboDuongKinh').change(this.cboDuongKinhOnChange.bind(this));
 
+        $('#btnKiemTraCotDai').click(this.btnKiemTraCotDaiOnClick.bind(this));
+
 
         $('#btnBeamProcess').click(this.btnBeamProcessOnClick.bind(this));
 
@@ -357,9 +359,13 @@ class EmployeeJS {
 
     showDialogDetailR() {
         // Clean tất cả các giá trị cũ trên các input trong form:
-        $('.dialog input').val(null);
+        $('.dialog-result input').val(null);
         $('.dialog-modal').show();
         $('.dialog-result').show();
+        $('#txtKCCotDai').removeClass("required-error");
+        $('#txtKCCotDai').removeAttr("title");
+
+        //$("#txtDienTich").prop('disabled', true);
         // $("#txtTenDam").focus();
     }
 
@@ -418,13 +424,115 @@ class EmployeeJS {
     }
 
     cboSoThanhOnChange() {
-        this.KiemTraKetQua();
+        this.KiemTraKetQuaThep();
     }
 
     cboDuongKinhOnChange() {
-        this.KiemTraKetQua();
+        this.KiemTraKetQuaThep();
     }
 
+    trowOnDoubleClick() {
+        var beamStatus = this.getBeamStatusSelected();
+        var beamID = this.getBeamIDSelected();
+        var isStatus = (beamStatus != "Chưa tính toán") && (beamStatus != null);
+        if (isStatus){
+            this.showDialogDetailR();
+            $("#cboSoThanh").val(1).change();
+            $("#cboDuongKinh").val(9).change();
+            $("#cboSoNhanh").val(0).change();
+            $("#cboDKCotDai").val(1).change();
+            $("#txtKCCotDai").val(3);
+            this.KiemTraKetQuaThep();
+            this.btnKiemTraCotDaiOnClick();
+        }
+    }
+
+    btnBeamProcessOnClick() {
+        var beamID = this.getBeamIDSelected();
+        if (beamID === null){
+            for (const beam of lstBeams) {
+                var beTongOnProcess = this.infoBeTong(beam.BeTong);
+                var thepOnProcess = this.infoThep(beam.Thep);
+                var heSoOnProcess = this.infoHeSo(beam.BeTong, beam.Thep);
+                var As = 0;
+                if (beam.MomentM < 0) {
+                    As = TinhThepHCN(beam.ChieuCaoh, beam.KhoangCacha, beam.BeRongb, beTongOnProcess.Rb, beam.MomentM,
+                        heSoOnProcess.alphaR, heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, heSoOnProcess.muyMax);
+                    As = As * 10000;
+                    As = Math.round(As * 1000) / 1000;
+                }
+                else if (beam.MomentM > 0) {
+                    var h0 = beam.ChieuCaoh - beam.KhoangCacha;
+                    As = TinhThepHCT(beam.NhipGiuaHaiDaml, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
+                        beam.MomentM, beam.BeDaySanhf, beTongOnProcess.Rb, h0,
+                        heSoOnProcess.xiR, thepOnProcess.Rs,beam.MuyMin, heSoOnProcess.muyMax);
+                    As = As * 10000;
+                    As = Math.round(As * 1000) / 1000;
+                }
+    
+                beam.As = As;
+                beam.KetQua = "As = " + As + " (cm^2) - Double click xem chi tiết";
+            }
+        }
+        else {
+            var beam = lstBeams[beamID - 1];
+            var beTongOnProcess = this.infoBeTong(beam.BeTong);
+            var thepOnProcess = this.infoThep(beam.Thep);
+            var heSoOnProcess = this.infoHeSo(beam.BeTong, beam.Thep);
+            var As = 0;
+            if (beam.MomentM > 0) {
+                As = TinhThepHCN(beam.ChieuCaoh, beam.KhoangCacha, beam.BeRongb, beTongOnProcess.Rb, beam.MomentM,
+                    heSoOnProcess.alphaR, heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, heSoOnProcess.muyMax);
+                As = As * 10000;
+                As = Math.round(As * 1000) / 1000;
+            }
+            else if (beam.MomentM < 0) {
+                var h0 = beam.ChieuCaoh - beam.KhoangCacha;
+                As = TinhThepHCT(beam.NhipDamL, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
+                    beam.MomentM, beam.BeDaySanhf, beTongOnProcess.Rb, h0,
+                    heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, heSoOnProcess.muyMax);
+                As = As * 10000;
+                As = Math.round(As * 1000) / 1000;
+            }
+
+            beam.As = As;
+            beam.KetQua = "As = " + As + " (cm^2) - Double click xem chi tiết";
+        }
+        
+        this.loadData();
+    }
+
+    btnKiemTraCotDaiOnClick() {
+        var kcCotDai = $("#txtKCCotDai").val();
+        var soNhanhCotDai = $("#cboSoNhanh option:selected").text();
+        var dkCotDai = $("#cboDKCotDai option:selected").text();
+        var beamID = this.getBeamIDSelected();
+        beamID--;
+        var beTong = this.infoBeTong(lstBeams[beamID].BeTong);
+        var thep = this.infoThep(lstBeams[beamID].Thep);
+        var isValid = (kcCotDai != "") && (!isNaN(kcCotDai)) && (soNhanhCotDai != "") && (dkCotDai != "");
+        if (isValid) {
+            var res = KiemTraCotDai(lstBeams[beamID].KhoangCacha, lstBeams[beamID].Q, beTong.Rb, beTong.Rbt, thep.Rsc, 
+                                   kcCotDai, thep.Es, beTong.Eb, lstBeams[beamID].BeRongb, lstBeams[beamID].ChieuCaoh, 
+                                   dkCotDai, soNhanhCotDai);
+            var obj = $('#spanDetailsCotDai').text(res);
+            obj.html(obj.html().replace(/\n/g, '<br/>'));
+        }
+        else{
+            $('#txtKCCotDai').addClass("required-error");
+            if (kcCotDai === ""){
+                $('#txtKCCotDai').attr("title", "Bạn phải nhập thông tin này.");
+            }
+            else{
+                $('#txtKCCotDai').attr("title", "Thông tin này phải là số.");
+            }
+            
+            var obj = $('#spanDetailsCotDai').text("Kiểm tra các giá trị \n đầu vào");
+            obj.html(obj.html().replace(/\n/g, '<br/>'));
+        }
+    }    
+
+    //#region Các hàm hỗ trợ
     infoBeTong(typeBeTong) {
         var beTong = {
             Rb: 750,
@@ -583,7 +691,7 @@ class EmployeeJS {
         return res;
     }
 
-    KiemTraKetQua() {
+    KiemTraKetQuaThep() {
         var soThanhOnChange = $("#cboSoThanh option:selected").text();
         var duongKinhOnChange = $("#cboDuongKinh option:selected").text();
         var beamID = this.getBeamIDSelected();
@@ -595,86 +703,19 @@ class EmployeeJS {
         var isThep = dienTich >= lstBeams[beamID].As;
         if (isThep){
             $('#spanStatus').text("Thỏa mãn");
-            $('#spanDetails').text("(cốt thép yêu cầu " + lstBeams[beamID].As
+            $('#spanDetailsThep').text("(cốt thép yêu cầu " + lstBeams[beamID].As
             + " cm^2)");
         }
         else{
             $('#spanStatus').text("Không thỏa mãn");
-            $('#spanDetails').text("(nhỏ hơn cốt thép yêu cầu " + lstBeams[beamID].As
+            $('#spanDetailsThep').text("(nhỏ hơn cốt thép yêu cầu " + lstBeams[beamID].As
             + " cm^2)");
         }
     }
 
-    trowOnDoubleClick() {
-        var beamStatus = this.getBeamStatusSelected();
-        var beamID = this.getBeamIDSelected();
-        var isStatus = (beamStatus != "Chưa tính toán") && (beamStatus != null);
-        if (isStatus){
-            this.showDialogDetailR();
-            $("#cboSoThanh").val(1).change();
-            $("#cboDuongKinh").val(9).change();
-            $("#cboSoNhanh").val(1).change();
-            $("#cboDKCotDai").val(1).change();
-            this.KiemTraKetQua();
-        }
-        
-    }
+    //#endregion
 
-    btnBeamProcessOnClick() {
-        var beamID = this.getBeamIDSelected();
-        if (beamID === null){
-            for (const beam of lstBeams) {
-                var beTongOnProcess = this.infoBeTong(beam.BeTong);
-                var thepOnProcess = this.infoThep(beam.Thep);
-                var heSoOnProcess = this.infoHeSo(beam.BeTong, beam.Thep);
-                var As = 0;
-                if (beam.MomentM < 0) {
-                    As = TinhThepHCN(beam.ChieuCaoh, beam.KhoangCacha, beam.BeRongb, beTongOnProcess.Rb, beam.MomentM,
-                        heSoOnProcess.alphaR, heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, heSoOnProcess.muyMax);
-                    As = As * 10000;
-                    As = Math.round(As * 1000) / 1000;
-                }
-                else if (beam.MomentM > 0) {
-                    var h0 = beam.ChieuCaoh - beam.KhoangCacha;
-                    As = TinhThepHCT(beam.NhipGiuaHaiDaml, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
-                        beam.MomentM, beam.BeDaySanhf, beTongOnProcess.Rb, h0,
-                        heSoOnProcess.xiR, thepOnProcess.Rs,beam.MuyMin, heSoOnProcess.muyMax);
-                    As = As * 10000;
-                    As = Math.round(As * 1000) / 1000;
-                }
     
-                beam.As = As;
-                beam.KetQua = "As = " + As + " (cm^2) - Double click xem chi tiết";
-            }
-        }
-        else {
-            var beam = lstBeams[beamID - 1];
-            var beTongOnProcess = this.infoBeTong(beam.BeTong);
-            var thepOnProcess = this.infoThep(beam.Thep);
-            var heSoOnProcess = this.infoHeSo(beam.BeTong, beam.Thep);
-            var As = 0;
-            if (beam.MomentM > 0) {
-                As = TinhThepHCN(beam.ChieuCaoh, beam.KhoangCacha, beam.BeRongb, beTongOnProcess.Rb, beam.MomentM,
-                    heSoOnProcess.alphaR, heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, heSoOnProcess.muyMax);
-                As = As * 10000;
-                As = Math.round(As * 1000) / 1000;
-            }
-            else if (beam.MomentM < 0) {
-                var h0 = beam.ChieuCaoh - beam.KhoangCacha;
-                As = TinhThepHCT(beam.NhipDamL, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
-                    beam.MomentM, beam.BeDaySanhf, beTongOnProcess.Rb, h0,
-                    heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, heSoOnProcess.muyMax);
-                As = As * 10000;
-                As = Math.round(As * 1000) / 1000;
-            }
-
-            beam.As = As;
-            beam.KetQua = "As = " + As + " (cm^2) - Double click xem chi tiết";
-        }
-        
-        this.loadData();
-    }
-
 
 }
 
@@ -832,5 +873,32 @@ function TinhThepHCT(L, alphaR, b, h, M, hf, Rb, h0, XiR, Rs, nguyMin, nguyMax) 
         kq = 0;
     }
     return kq;
+}
+
+function KiemTraCotDai(a, Qmax, Rb, Rbt, Rsw, s, Es, Eb, b, h, phi, n) {
+    if (Qmax < 0.3 * Rb * b * (h - a)) {
+        var Qmin = 0.5 * Rbt * b * (h - a);
+        var Asw = Math.PI * (phi / (2 * 1000)) * (phi / (2 * 1000))
+
+        var Qsw = Rsw * Asw / s;
+        var Mw = n * Asw / (b * s);
+        var alpha = Es / Eb;
+        var phi_b1 = 1 - 0.01 * Rb / 100;
+        var phi_w1 = 1 + 5 * alpha * Mw;
+        if (Qmax < Qmin) {
+            return "Dầm đủ khả năng chịu cắt.\n Đặt cốt đai theo cấu tạo.";
+        }
+        else {
+            if (Qmax < (0.3 * phi_w1 * phi_b1 * Rb * b * h)) {
+                return "Cốt đai đã chọn đạt yêu cầu.";
+            }
+            else {
+                return "Không đạt yêu cầu.\n Chọn lại cốt đai.";
+            }
+        }
+    }
+    else {
+        return "Dầm không đủ khả năng chịu\n ứng suất nén chính.\n Chọn lại tiết diện";
+    }
 }
 //#endregion
