@@ -488,7 +488,7 @@ class EmployeeJS {
             }
             else if (beam.MomentM > 0) {
                 var h0 = beam.ChieuCaoh - beam.KhoangCacha;
-                As = TinhThepHCT(beam.NhipDamL, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
+                As = TinhThepHCT(beam.NhipGiuaHaiDaml, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
                     beam.MomentM, beam.BeDaySanhf, beTongOnProcess.Rb, h0,
                     heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, heSoOnProcess.muyMax);
                 As = As * 10000;
