@@ -614,8 +614,8 @@ class EmployeeJS {
                 break;
             }
             case "CIII - AIII (6-8)": {
-                thep.Rs = 33500;
-                thep.Rsc = 33500;
+                thep.Rs = 35500;
+                thep.Rsc = 35500;
                 thep.Es = 20000000;
                 break;
             }
@@ -627,7 +627,7 @@ class EmployeeJS {
             }
             case "CIV - AIV": {
                 thep.Rs = 51000;
-                thep.Rsc = 35000;
+                thep.Rsc = 45000;
                 thep.Es = 19000000;
                 break;
             }
