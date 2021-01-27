@@ -463,8 +463,8 @@ class EmployeeJS {
                 }
                 else if (beam.MomentM > 0) {
                     var h0 = beam.ChieuCaoh - beam.KhoangCacha;
-                    As = TinhThepHCT(beam.NhipGiuaHaiDaml, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
-                        beam.MomentM, beam.BeDaySanhf, beTongOnProcess.Rb, h0,
+                    As = TinhThepHCT(beam.NhipGiuaHaiDaml * 1, heSoOnProcess.alphaR * 1, beam.BeRongb * 1, beam.ChieuCaoh * 1,
+                        beam.MomentM * 1, beam.BeDaySanhf * 1, beTongOnProcess.Rb, h0,
                         heSoOnProcess.xiR, thepOnProcess.Rs,beam.MuyMin, heSoOnProcess.muyMax);
                     As = As * 10000;
                     As = Math.round(As * 1000) / 1000;
@@ -488,9 +488,9 @@ class EmployeeJS {
             }
             else if (beam.MomentM > 0) {
                 var h0 = beam.ChieuCaoh - beam.KhoangCacha;
-                As = TinhThepHCT(beam.NhipGiuaHaiDaml, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
-                    beam.MomentM, beam.BeDaySanhf, beTongOnProcess.Rb, h0,
-                    heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, heSoOnProcess.muyMax);
+                As = TinhThepHCT(beam.NhipGiuaHaiDaml * 1, heSoOnProcess.alphaR * 1, beam.BeRongb * 1, beam.ChieuCaoh * 1,
+                    beam.MomentM * 1, beam.BeDaySanhf * 1, beTongOnProcess.Rb, h0,
+                    heSoOnProcess.xiR, thepOnProcess.Rs,beam.MuyMin, heSoOnProcess.muyMax);
                 As = As * 10000;
                 As = Math.round(As * 1000) / 1000;
             }
