@@ -480,13 +480,13 @@ class EmployeeJS {
             var thepOnProcess = this.infoThep(beam.Thep);
             var heSoOnProcess = this.infoHeSo(beam.BeTong, beam.Thep);
             var As = 0;
-            if (beam.MomentM > 0) {
+            if (beam.MomentM < 0) {
                 As = TinhThepHCN(beam.ChieuCaoh, beam.KhoangCacha, beam.BeRongb, beTongOnProcess.Rb, beam.MomentM,
                     heSoOnProcess.alphaR, heSoOnProcess.xiR, thepOnProcess.Rs, beam.MuyMin, heSoOnProcess.muyMax);
                 As = As * 10000;
                 As = Math.round(As * 1000) / 1000;
             }
-            else if (beam.MomentM < 0) {
+            else if (beam.MomentM > 0) {
                 var h0 = beam.ChieuCaoh - beam.KhoangCacha;
                 As = TinhThepHCT(beam.NhipDamL, heSoOnProcess.alphaR, beam.BeRongb, beam.ChieuCaoh,
                     beam.MomentM, beam.BeDaySanhf, beTongOnProcess.Rb, h0,
