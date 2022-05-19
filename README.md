@@ -4,7 +4,7 @@ Dự án này được xây dựng với HTML + CSS + Javascript
 
 ## Cách chạy website
 
-Truy cập vào địa chỉ https://qwrite.github.io
+Truy cập vào địa chỉ https://quoc9x.github.io
 
 ## Phần back-end của dự án đang được xây dựng
 
