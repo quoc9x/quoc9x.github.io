@@ -1,0 +1,3 @@
+﻿function loadData() {
+    alert('common!');
+}

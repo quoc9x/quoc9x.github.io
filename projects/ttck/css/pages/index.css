@@ -1,0 +1,104 @@
+﻿
+.dialog-modal{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; 
+    background-color: #808080;
+    opacity: 0.4;
+}
+
+.dialog {
+    display: none;
+    position: absolute;
+    /*color: #fff;*/
+    width: 830px;
+    height: 465px;
+    border: 3px solid #0973b9;
+    border-radius: 3px;
+    background-color: #fff;
+    top: calc(50% - 270px);
+    left: calc(50% - 300px);
+    right: 0;
+    bottom: 0;
+}
+
+/* Các thuộc tính CSS của form Add */
+    .dialog .dialog-title {
+        display: flex;
+        height: 25px;
+        color: #fff;
+        line-height: 22px;
+        /*width: 600px;*/
+        background-color: #0973b9;
+    }
+
+        .dialog .dialog-title .title-close-bottom {
+            position: absolute;
+            right: 0;
+            border: 1px solid #ff0000;
+            width: 16px;
+            height: 16px;
+            background-image: url('../../content/images/cancel.png');
+            background-repeat: no-repeat;
+            border-radius: 50%;
+            background-position: center;
+            cursor: pointer;
+        }
+
+    .dialog .dialog-body {
+        padding: 10px;
+        background-color: #fff;
+        height: calc(100% - 85px);
+    }
+
+    .dialog .dialog-footer {
+        height:40px;
+        width: 100%;
+        border-top: 1px solid #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+        .dialog .dialog-footer button{
+            margin-right: 10px;
+        }
+/* /////////////////////////////////////////////////// */
+
+
+
+        input {
+            padding: 0 4px;
+            border: 1px solid #ccc;
+            height: 25px;
+        }
+
+    input:focus {
+        border: 1px solid #0973b9;
+        outline: none;
+    }
+
+    .row{
+        margin-bottom: 8px;
+    }
+    
+    label{
+        display: block;
+    }
+
+    button{
+        width: 75px;
+        /*height:35px;*/
+        padding: 4px 4px;
+    }
+
+    .required-error, .required-error:focus {
+        border: 1px solid #ff0000;
+    }
+
+    .row-selected{
+        background-color: #b8e3ff;
+    }

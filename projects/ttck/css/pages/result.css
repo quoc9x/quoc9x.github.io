@@ -1,0 +1,77 @@
+
+
+.dialog-result {
+    display: none;
+    position: absolute;
+    /*color: #fff;*/
+    width: 710px;
+    height: 340px;
+    border: 3px solid #0973b9;
+    border-radius: 3px;
+    background-color: #fff;
+    top: calc(50% - 240px);
+    left: calc(50% - 300px);
+    right: 0;
+    bottom: 0;
+}
+
+
+/* Các thuộc tính CSS của form thông tin vật liệu */
+.dialog-result .dialog-title {
+    display: flex;
+    height: 25px;
+    color: #fff;
+    line-height: 22px;
+    /*width: 600px;*/
+    background-color: #0973b9;
+}
+
+    .dialog-result .dialog-title .title-close-bottomR {
+        position: absolute;
+        right: 0;
+        border: 1px solid #ff0000;
+        width: 16px;
+        height: 16px;
+        background-image: url('../../content/images/cancel.png');
+        background-repeat: no-repeat;
+        border-radius: 50%;
+        background-position: center;
+        cursor: pointer;
+    }
+
+.dialog-result .dialog-body {
+    padding: 10px;
+    background-color: #fff;
+    height: calc(100% - 85px);
+}
+
+.dialog-result .dialog-footer {
+    height:40px;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+    .dialog-result .dialog-footer button{
+        margin-right: 10px;
+    }
+
+    .dialog-result .row{
+        margin-bottom: 8px;
+    }
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+
+.res-thep-text {
+    float: left;
+}
+
+.res-thep-image{
+    margin: 8px;
+    float: right;
+}
+
+.span-res{
+    color: #0000ff;
+}

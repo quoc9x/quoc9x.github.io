@@ -1,0 +1,437 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Website tính toán cấu kiện</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./content/my_images/Q_char.ico" />
+    <link href="./css/pages/customer.css" rel="stylesheet" />
+    <link href="./css/pages/index.css" rel="stylesheet" />
+    <link href="./css/pages/material.css" rel="stylesheet" />
+    <link href="./css/pages/result.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <!--Menu-->
+    <div class="menu">
+        <!--Logo-->
+        <div id="logo">
+            <div class="iconbar"></div>
+            <!--Example: inline
+            <div class="iconbar" style="width:200px"></div>-->
+            <div class="logo-text">
+                <span class="logo-textt">TTCK</span>
+            </div>
+        </div>
+        <!--Menu-item-->
+        <div id="menu-content">
+            <a href="index.html" class="menu-item">
+                <div class="menu-item-icon icon-report"></div>
+                <div class="menu-item-text">Tính toán dầm</div>
+            </a>
+            <a href="index.html" class="menu-item">
+                <div class="menu-item-icon icon-board"></div>
+                <div class="menu-item-text">Tính toán sàn</div>
+            </a>
+            <a href="index.html" class="menu-item">
+                <div class="menu-item-icon icon-report"></div>
+                <div class="menu-item-text">Tính toán cột</div>
+            </a>
+            <a href="index.html" class="menu-item">
+                <div class="menu-item-icon icon-report"></div>
+                <div class="menu-item-text">Đăng nhập</div>
+            </a>
+            <a href="index.html" class="menu-item">
+                <div class="menu-item-icon icon-report"></div>
+                <div class="menu-item-text">Trợ giúp</div>
+            </a>
+            <a href="index.html" class="menu-item">
+                <div class="menu-item-icon icon-report"></div>
+                <div class="menu-item-text">Blog</div>
+            </a>
+            <a href="index.html" class="menu-item">
+                <div class="menu-item-icon icon-report"></div>
+                <div class="menu-item-text">About</div>
+            </a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-header"></div>
+        <div class="content-body">
+            <div class="page-title">
+                <h1>
+                    Danh sách dầm cần tính toán
+                </h1>
+            </div>
+            <div class="grid-content">
+                <div class="toolbar">
+                    <button style="width: 130px;" id="btnImportExcel"><i class="icon icon-importexcel"></i>Import từ
+                        Excel</button>
+                    <input id="file-input" type="file" name="name" style="display: none;" accept=".xlsx, .xls"/>
+                    <button id="btnAdd"><i class="icon icon-add"></i>Thêm</button>
+                    <button id="btnEdit"><i class="icon icon-edit"></i>Sửa</button>
+                    <button id="btnDelete"><i class="icon icon-delete"></i>Xóa</button>
+                    <button style="width: 150px;" id="btnInfoMat"><i class="icon icon-infomat"></i>Thông tin vật
+                        liệu</button>
+                    <button style="width: 90px;" id="btnBeamProcess"><i class="icon icon-beamprocess"></i>Tính
+                        toán</button>
+                </div>
+                <div class="gridbar">
+                    <table id="tbBeamList" border="1" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên dầm</th>
+                                <th>Bê tông</th>
+                                <th>Thép</th>
+                                <th>Chiều cao h (m)</th>
+                                <th>Bề rộng b (m)</th>
+                                <th>Bề dày sàn hf (m)</th>
+                                <th>Nhịp dầm L (m)</th>
+                                <th>Khoảng cách nhịp giữa 2 dầm l (m)</th>
+                                <th>Khoảng cách a (m)</th>
+                                <th>Hàm lượng CT μ min (%)</th>
+                                <th>Mô men M (Tm)</th>
+                                <th>Lực cắt Q (T)</th>
+                                <th>Kết quả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paging">
+                    paging
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Dialog chi tiết thông tin dầm cần tính toán-->
+    <div class="dialog-modal">
+
+    </div>
+
+    <div class="dialog">
+        <div class="dialog-title">
+            <div class="title-text">
+                Thêm thông tin dầm cần tính toán
+            </div>
+            <div class="title-close-bottom">
+
+            </div>
+
+        </div>
+
+        <div class="dialog-body">
+
+            <fieldset style="float: left;">
+                <legend>Thông số hình học:</legend>
+                <div class="row">
+                    <label>Tên dầm</label>
+                    <!--<input id="txtEmployeeCode" class="required" type="text" />-->
+                    <input id="txtTenDam" required type="text" />
+                </div>
+                <div class="row">
+                    <label>Chiều cao h (m)</label>
+                    <!--<input id="txtEmployeeName" class="required" type="text" />-->
+                    <input id="txtChieuCaoh" required type="text" />
+                </div>
+                <div class="row">
+                    <label>Bề rộng b (m)</label>
+                    <!--<input id="txtEmail" class="required"  type="email" />-->
+                    <input id="txtBeRongb" required type="text" />
+                </div>
+                <div class="row-right">
+                    <label>Bề dày sàn hf (m)</label>
+                    <input id="txtBeDaySanhf" required type="text" />
+                </div>
+                <div class="row">
+                    <label>Nhịp dầm L (m)</label>
+                    <input id="txtNhipDamL" required type="text" />
+                </div>
+                <div class="row">
+                    <label>Khoảng cách nhịp dầm (m)</label>
+                    <input id="txtKCGiua2NhipDam" required type="text" />
+                </div>
+                <div class="row">
+                    <label>Khoảng cách a (m)</label>
+                    <input id="txtKhoangCacha" required type="text" />
+                </div>
+
+            </fieldset>
+
+            <fieldset style="float: left;">
+                <legend>Vật liệu:</legend>
+                <div class="row">
+                    <label>Bê tông</label>
+                    <select id="cboBeTong">
+                        <option value="1">B12.5 - M150</option>
+                        <option value="2">B15 - M200</option>
+                        <option value="3">B20 - M250</option>
+                        <option value="4">B25 - M350</option>
+                        <option value="5">B30 - M400</option>
+                        <option value="6">B35 - M450</option>
+                        <option value="7">B40 - M500</option>
+                        <option value="8">B45 - M600</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <label>Thép</label>
+                    <select id="cboThep">
+                        <option value="1">CI - AI</option>
+                        <option value="2">CII - AII</option>
+                        <option value="3">CIII - AIII (6-8)</option>
+                        <option value="4">CIII - AIII (10-40)</option>
+                        <option value="5">CIV - AIV</option>
+                        <option value="6">AV</option>
+                        <option value="7">AVI</option>
+                        <option value="8">AT - VII</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <fieldset style="float: left;">
+                <legend>Nội lực và hệ số:</legend>
+                <div class="row">
+                    <label>Mô men (Tm)</label>
+                    <input id="txtMomentM" required type="text" />
+                </div>
+                <div class="row">
+                    <label>Lực cắt Q (T)</label>
+                    <input id="txtLucCatQ" required type="text" />
+                </div>
+                <div class="row">
+                    <label>Hàm lượng CT μ min (%):</label>
+                    <input id="txtMuyMin" required type="text" />
+                </div>
+            </fieldset>
+            <div style="float: right;">
+                <img src="./content/images/D_tietdienchuT.png" alt="Dầm">
+            </div>
+
+        </div>
+
+        <div class="dialog-footer">
+            <button id="btnSave">Lưu</button>
+            <button id="btnCancel">Hủy</button>
+        </div>
+    </div>
+
+    <!-- Dialog chi tiết thông tin vật liệu -->
+    <!-- <div class="dialog-modal">
+
+    </div> -->
+    <div class="dialog-material">
+        <div class="dialog-title">
+            <div class="title-text">
+                Thông tin vật liệu
+            </div>
+            <div class="title-close-bottomM">
+
+            </div>
+
+        </div>
+
+        <div class="dialog-body">
+
+            <fieldset style="height:210px; float: left;">
+                <legend>Bê tông:</legend>
+                <div class="row">
+                    <label>Bê tông</label>
+                    <select id="cboBeTongM">
+                        <option value="0">B12.5 - M150</option>
+                        <option value="1">B15 - M200</option>
+                        <option value="2">B20 - M250</option>
+                        <option value="3">B25 - M350</option>
+                        <option value="4">B30 - M400</option>
+                        <option value="5">B35 - M450</option>
+                        <option value="6">B40 - M500</option>
+                        <option value="7">B45 - M600</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <label>Rb (T)</label>
+                    <input id="txtRb" required type="text" />
+                </div>
+                <div class="row">
+                    <label>Rbt (T)</label>
+                    <input id="txtRbt" required type="text" />
+                </div>
+                <div class="row">
+                    <label>Eb (T)</label>
+                    <input id="txtEb" required type="text" />
+                </div>
+            </fieldset>
+
+            <fieldset style="height:210px; float: left;">
+                <legend>Thép:</legend>
+                <div class="row">
+                    <label>Thép</label>
+                    <select id="cboThepM">
+                        <option value="0">CI - AI</option>
+                        <option value="1">CII - AII</option>
+                        <option value="2">CIII - AIII (6-8)</option>
+                        <option value="3">CIII - AIII (10-40)</option>
+                        <option value="4">CIV - AIV</option>
+                        <option value="5">AV</option>
+                        <option value="6">AVI</option>
+                        <option value="7">AT - VII</option>
+                    </select>
+                    <div class="row">
+                        <label>Rs (T)</label>
+                        <input id="txtRs" required type="text" />
+                    </div>
+                    <div class="row">
+                        <label>Rsc (T)</label>
+                        <input id="txtRsc" required type="text" />
+                    </div>
+                    <div class="row">
+                        <label>Es (T)</label>
+                        <input id="txtEs" required type="text" />
+                    </div>
+                </div>
+            </fieldset>
+
+
+
+
+            <fieldset style="height:210px; float: left;">
+                <legend>Hệ số:</legend>
+                <div class="row">
+                    <label>alphaR:</label>
+                    <input id="txtalphaR" required type="text" />
+                </div>
+                <div class="row">
+                    <label>xiR:</label>
+                    <input id="txtxiR" required type="text" />
+                </div>
+                <!-- <div class="row">
+                    <label>muyMin (%):</label>
+                    <input id="txtmuyMin" required type="text" />
+                </div> -->
+                <div class="row">
+                    <label>muyMax (%):</label>
+                    <input id="txtmuyMax" required type="text" />
+                </div>
+            </fieldset>
+
+
+        </div>
+
+        <div class="dialog-footer">
+            <button id="btnOkM">Ok</button>
+        </div>
+    </div>
+
+    <!-- Dialog chi tiết kết quả tính toán -->
+    <div class="dialog-result">
+        <div class="dialog-title">
+            <div class="title-text">
+                Kết quả tính toán
+            </div>
+            <div class="title-close-bottomR">
+            </div>
+        </div>
+
+        <div class="dialog-body">
+            <fieldset style="float: left; height: 240px;">
+                <legend>Chọn cốt thép:</legend>
+                <div class="res-thep-text">
+                    <div class="row">
+                        <label>Số thanh: </label>
+                        <select id="cboSoThanh">
+                            <option value="0">2</option>
+                            <option value="1">3</option>
+                            <option value="2">4</option>
+                            <option value="3">5</option>
+                            <option value="4">6</option>
+                            <option value="5">7</option>
+                            <option value="6">8</option>
+                            <option value="7">9</option>
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <label>Đường kính (mm): </label>
+                        <select id="cboDuongKinh">
+                            <option value="0">8</option>
+                            <option value="1">10</option>
+                            <option value="2">12</option>
+                            <option value="3">14</option>
+                            <option value="4">16</option>
+                            <option value="5">18</option>
+                            <option value="6">20</option>
+                            <option value="7">22</option>
+                            <option value="8">25</option>
+                            <option value="9">28</option>
+                            <option value="10">30</option>
+                            <option value="11">32</option>
+                            <option value="12">36</option>
+                            <option value="13">40</option>
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <label>Diện tích (cm^2):</label>
+                        <input id="txtDienTich" type="text" style="color:blue" readonly="readonly" />
+                    </div>
+                    <div class="row">
+                        <span id="spanStatus" class="span-res"></span>
+                    </div>
+                    <div class="row">
+                        <span id="spanDetailsThep" class="span-res"></span>
+                    </div>
+                </div>
+
+            </fieldset> 
+            
+            <fieldset style="float: left; height: 240px;">
+                <legend>Chọn cốt đai:</legend>
+                <div class="row">
+                    <label>Số nhánh: </label>
+                    <select id="cboSoNhanh">
+                        <option value="0">2</option>
+                        <option value="1">3</option>
+                        <option value="2">4</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <label>Đường kính cốt đai (mm):</label>
+                    <select id="cboDKCotDai">
+                        <option value="0">6</option>
+                        <option value="1">8</option>
+                        <option value="2">10</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <label>Khoảng cách cốt đai (mm):</label>
+                    <input id="txtKCCotDai" type="text" />
+                </div>
+                <div class="row">
+                    <button id="btnKiemTraCotDai">Kiểm Tra</button>
+                </div>
+                <div class="row">
+                    <span id="spanDetailsCotDai" class="span-res">Chưa tính cốt đai</span>
+                </div>
+            </fieldset>      
+            
+            <div class="res-thep-image">
+                <img src="./content/my_images/img_thep.png"/>
+            </div>
+
+        </div>
+
+        <div class="dialog-footer">
+            <button id="btnOkR">Ok</button>
+        </div>
+
+    </div>
+
+    <script src="./js/jquery-3.5.1.min.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/commontest.js"></script>
+</body>
+
+</html>
