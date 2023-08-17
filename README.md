@@ -1,15 +1,12 @@
-# WebUi - Dự án Frontend website tính toán cấu kiện 
+# Introduction
 
-Dự án này được xây dựng với HTML + CSS + Javascript
+Hi there =))   
+This is the repo containing the source code of my portfolio site.
 
-## Cách chạy website
+## Start
 
-Truy cập vào địa chỉ https://quoc9x.github.io
+Click on this link =>> https://quoc9x.github.io
 
-## Phần back-end của dự án đang được xây dựng
-
-Phần back-end sử dụng .Net Core 3.1
-
-## Các hướng dẫn khác
-
-
+## Image   
+    
+![screenshot](./assets/img/screenshot.png)
