@@ -13,7 +13,7 @@ jobs:
     - name: Checkout code
       # Sử dụng action "checkout" để sao copy code từ repository vào máy ảo Ubuntu
       uses: actions/checkout@v2
-    - name: Update README.md
+    - name: Change background
       run: |
         date
         chmod +x change-background.sh && ./change-background.sh
