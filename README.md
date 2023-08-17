@@ -5,7 +5,7 @@ This is the repo containing the source code of my portfolio site.
 
 ## Start
 
-Click on this link =>> https://quoc9x.github.io
+Click on this link =>> <a href="https://quoc9x.github.io" target="_blank">https://quoc9x.github.io</a>   
 
 ## Image   
     
